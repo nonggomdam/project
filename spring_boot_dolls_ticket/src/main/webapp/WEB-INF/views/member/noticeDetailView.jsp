@@ -5,19 +5,9 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>관리자 공지 상세 페이지</title>
+		<title>공지 상세 페이지</title>
 		<c:import url="/WEB-INF/views/layout/adminHead.jsp"/>
 		<c:import url="/WEB-INF/views/layout/top.jsp"/>
-		<script>
-			function deleteCheck() {
-				let answer = confirm("등록된 공지 사항을 삭제하시겠습니까? ");
-				
-				if (answer) location.href = "/admin/deleteNotice/${notice.noticeNo}";
-			}
-			function updateNotice() {
-				location.href = "/admin/updateNoticeForm/${notice.noticeNo}";
-			}
-		</script>
 	</head>
 	<body>
 		<div class="detailWrapper">
@@ -53,8 +43,6 @@
 							<td colspan="5">${notice.noticeContent}</td>
 						</tr>
 					</table>
-					<button class="updateBtn" onclick="updateNotice();">수정</button>
-					<button class="deleteBtn" onclick="deleteCheck();">삭제</button>
 				</div>
 			</div>
 			<c:import url="/WEB-INF/views/layout/footer.jsp"/>

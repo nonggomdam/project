@@ -6,5 +6,4 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/admin.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/mypage.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/navbar.css'/>">
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/font3.css'/>">
 <script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>

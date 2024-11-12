@@ -37,10 +37,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.spring_boot_dolls_ticket.project.model.InquiryVO;
 import com.spring_boot_dolls_ticket.project.model.MemberVO;
+import com.spring_boot_dolls_ticket.project.model.NoticeVO;
 import com.spring_boot_dolls_ticket.project.model.ReservationVO;
 import com.spring_boot_dolls_ticket.project.service.InquiryService;
 import com.spring_boot_dolls_ticket.project.service.MemberService;
 import com.spring_boot_dolls_ticket.project.service.ReservationService;
+import com.spring_boot_dolls_ticket.project.service.NoticeService;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,6 +60,9 @@ public class MemberController {
 	
 	@Autowired
 	InquiryService inquiryService;
+	
+	@Autowired
+	NoticeService noticeService;
 	
 	private Map<String, Object> store = new ConcurrentHashMap<>(); // 세션 저장소
 	
@@ -646,6 +651,28 @@ public class MemberController {
 		memService.updateReservation(in);
 		
 		return "redirect:/member/confirmation/0"; 
+	}
+	
+	// 공지 사항 목록 페이지 이동
+	@RequestMapping("/member/noticeList")
+	public String noticeList(Model model) {
+		
+		ArrayList<NoticeVO> noticeList = noticeService.listAllNotice();
+		
+		model.addAttribute("noticeList", noticeList);
+		
+		return "member/noticeList";
+	}
+	
+	// 공지 사항 상세 페이지 이동 처리
+	@RequestMapping("/member/noticeDetailView/{noticeNo}")
+	public String noticeDetailView(@PathVariable int noticeNo, Model model) {
+		NoticeVO notice = noticeService.detailViewNotice(noticeNo);
+		
+		model.addAttribute("notice", notice);
+		noticeService.updateHitNum(noticeNo);
+		
+		return "member/noticeDetailView";
 	}
 
 }

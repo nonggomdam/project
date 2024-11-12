@@ -1,13 +1,31 @@
 @charset "UTF-8";
 
+@font-face {
+   font-family: 'TheJamsil1Thin';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil1Thin.woff2') format('woff2');
+   font-weight: 100; /*이미 위에서 1Thin 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+
+@font-face {
+ font-family: 'TheJamsil3Regular';
+ src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil3Regular.woff2') format('woff2');
+ font-weight: 300; /*이미 위에서 3Regular 이렇게 정해져서 font-weight 의미 없음*/
+ font-style: normal;
+}
+
 body {
 	height: 100%;
     margin: 0;
     padding: 0;
 	overflow-x: hidden;
+	font-family: 'TheJamsil1Thin';
+}
+h3 {
+	font-family: 'TheJamsil3Regular'
 }
 .adminMainWrapper {
-	width: 940px;
+	width: 1000px;
 	margin-top: 50px;
 }
 .outerTable {
@@ -135,6 +153,9 @@ body {
 }
 .detailTableWrap {
 	width: 80%;
+}
+#noticeTableWrap {
+	width: 100%;
 }
 .detailTable {
     width: 100%; /* 테이블 너비 100% */
