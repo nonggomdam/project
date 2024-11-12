@@ -36,6 +36,7 @@ public class PerformanceVO {
 	private int clickCount; // 클릭 수
 	private String performanceLocationId;
 	private int reservationStatusYCount;
+	private int reservationDateInteger;
 	
 	public String getPerformanceLocationId() {
 		return performanceLocationId;
@@ -200,6 +201,12 @@ public class PerformanceVO {
 	}
 	public void setReservationStatusYCount(int reservationStatusYCount) {
 		this.reservationStatusYCount = reservationStatusYCount;
+	}
+	public int getReservationDateInteger() {
+		return reservationDateInteger;
+	}
+	public void setReservationDateInteger(int reservationDateInteger) {
+		this.reservationDateInteger = reservationDateInteger;
 	}
     
 	

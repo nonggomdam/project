@@ -1,5 +1,6 @@
 package com.spring_boot_dolls_ticket.project.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,6 +42,22 @@ public class HomeController {
 			
 
 			Date today = new Date();
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+	        String dateString = formatter.format(today);
+
+	        int dateInt = Integer.parseInt(dateString); // String을 int로 변환
+			
+	        for (PerformanceVO performance : performanceList) {
+	            Date reservationDate = performance.getReservationOpenExpectedDate();
+	            String reservationDateString = formatter.format(reservationDate);
+	            int reservationDateInteger = Integer.parseInt(reservationDateString); // 변수명 수정
+	            
+	            System.out.println("Reservation Date (String): " + reservationDateString);
+	            int Dday = reservationDateInteger-dateInt;
+	            // 변환한 값을 PerformanceVO 객체에 설정
+	            performance.setReservationDateInteger(Dday); // 메서드와 변수명이 일치하도록 수정
+	        }
+	        
 			//뮤지컬, 예매가능한 뮤지컬만 필터링
 			performanceOpenList = performanceRankingList.stream().filter( o -> "M".equals(o.getPerformanceKindCd()))
 														  .filter( o -> o.getMinPerformanceDate() != null) //일단 오류 막기위해 널인애들 제거, 원래는 디비에서 다넣어줘야함.
