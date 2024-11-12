@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring_boot_dolls_ticket.project.dao.IReviewDAO">
+
+	<insert id="insertReview" parameterType="com.spring_boot_dolls_ticket.project.model.ReviewVO">
+    	INSERT INTO PERFORMANCE_REVIEW_M (REVIEW_SEQ, REVIEW_SCORE, REVIEW_MESSAGE, FIRST_CHANGE_DATE, PERFORMANCE_ID, CUST_ID)
+    	VALUES (DEFAULT, #{reviewScore}, #{reviewMessage}, SYSDATE, #{performanceId}, #{custId})
+	</insert>
+	
+	<select id="reviewList" parameterType="string" resultType="com.spring_boot_dolls_ticket.project.model.ReviewVO">
+		SELECT CUST_ID as custId
+         , REVIEW_SEQ as reviewSeq
+         , REVIEW_SCORE as reviewScore
+         , REVIEW_MESSAGE as reviewMessage
+         , FIRST_CHANGE_DATE as firstChangeDate
+        FROM PERFORMANCE_REVIEW_M WHERE PERFORMANCE_ID=#{performanceId}
+        ORDER BY REVIEW_SEQ DESC    
+	</select>
+
+	<delete id="deleteReview" parameterType="int">
+	    DELETE FROM PERFORMANCE_REVIEW_M
+	    WHERE REVIEW_SEQ = #{reviewSeq}
+	</delete>
+	
+</mapper>

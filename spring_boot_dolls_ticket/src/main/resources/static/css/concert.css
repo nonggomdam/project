@@ -1,0 +1,154 @@
+@charset "UTF-8";
+@font-face {
+   font-family: 'TheJamsil4Medium';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil4Medium.woff2') format('woff2');
+   font-weight: 400; /*이미 위에서 4Medium 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+@font-face {
+   font-family: 'TheJamsil1Thin';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil1Thin.woff2') format('woff2');
+   font-weight: 100; /*이미 위에서 1Thin 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+@font-face {
+   font-family: 'TheJamsil2Light';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil2Light.woff2') format('woff2');
+   font-weight: 200; /*이미 위에서 2Light 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+
+.swiper {
+	margin-top:30px;
+    width: 100%;
+    height: 405px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 450px;
+  height: 405px;
+  object-fit: cover;
+}
+
+.swiper-slide a .slide-txt {
+	font-size: 30px;
+    position: absolute;
+    text-align: center;
+    bottom: 20px;
+    width: 100%;
+    transition: 0.3s all;
+}
+
+.swiper-slide a .slide-txt p {
+    color: #fff;
+    line-height: 34px;
+    padding: 0 20px;
+    font-family: 'TheJamsil4Medium', sans-serif;
+}
+
+.swiper-slide a .slide-txt .slide-detail {
+    font-size: 15px;
+}
+
+.pinfo > a {
+	text-decoration: none;
+}
+
+.pinfo img:hover {
+	transform: scale(1.1);
+}
+
+#now-open{
+	margin-top:160px;
+	margin-bottom : 100px;
+	font-weight: bold;
+}
+
+#comming-soon{
+	margin-top:160px;
+	margin-bottom : 100px;
+	font-weight: bold;
+}
+
+/*  		.images {
+			width : 70%;
+            display: flex;
+		    flex-wrap: wrap;  요소가 넘칠 경우 줄바꿈
+		    justify-content: center;  가운데 정렬
+		    gap: 32px;  이미지 사이의 간격
+            height : 1250px;
+        }
+        
+        .item {
+		    width: calc(20% - 20px);  한 줄에 5개(너비의 20%) - 간격 보정
+		    height: 540px;  고정된 높이
+		    position: relative;
+		    margin-top:40px;
+		    margin-bottom: 40px;  아래쪽 여백
+		}
+		
+		.item #deteail{
+			margin-top : 32px;
+		    color:#ff9900;
+		}
+		
+		.item img {
+		    width: 100%;
+		    height: 100%;
+		    object-fit: cover;  이미지 비율 유지하며 공간에 맞추기
+			transition: opacity 0.3s ease;
+		}
+        .caption {
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		    background-color: rgba(0, 0, 0, 0.7);  반투명 배경
+		    color: white;
+		    display: flex;
+		    flex-direction: column;
+		    justify-content: center;
+		    align-items: center;
+		    opacity: 0;  처음에는 숨김
+		    transition: opacity 0.3s ease;  부드러운 전환 효과	    
+		}
+		.caption p{
+			margin-bottom : 10px;
+			font-size:14px;
+			padding : 15px;
+			text-align:center;
+		}		
+		.caption a {
+			color: #fff;
+			background-color: #585454;
+			text-decoration: none;
+			padding : 7px;
+			border-radius : 5px;
+			margin-top : 16px;
+			font-size:14px;
+		}	
+		.caption a:hover {
+			color: #000000;
+			background-color: #ffffff;			
+		}
+		
+		.item:hover img{
+			transform: scale(1.1);
+		}
+		.item:hover .caption {
+		    opacity: 1;  마우스를 올렸을 때 글자 보이기
+		    transform: scale(1.1);
+		} */
+		
+

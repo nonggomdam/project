@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring_boot_dolls_ticket.project.dao.IInquiryDAO">
+    <resultMap id="inquiryResult" type="com.spring_boot_dolls_ticket.project.model.InquiryVO">
+        <result column="INQUIRY_ID" property="inquiryId" />
+        <result column="CUST_ID" property="custId" />
+        <result column="TITLE" property="title" />
+        <result column="CONTENT" property="content" />
+        <result column="REG_DATE" property="regDate" jdbcType="DATE"/>
+        <result column="RESPONSE_CONTENT" property="responseContent" />
+        <result column="RESPONSE_DATE" property="responseDate" jdbcType="DATE"/>
+        <result column="STATUS" property="status" />
+        <result column="CATEGORY" property="category" />
+    </resultMap>
+    <select id="listAllInquiry" resultMap="inquiryResult" parameterType="string">
+        SELECT * FROM INQUIRY WHERE CUST_ID = #{custId} ORDER BY REG_DATE
+    </select>
+    <insert id="insertInquiry" parameterType="com.spring_boot_dolls_ticket.project.model.InquiryVO">
+    	INSERT INTO INQUIRY (CUST_ID, TITLE, CONTENT, CATEGORY) 
+    	VALUES (#{custId}, #{title}, #{content}, #{category})
+    </insert>
+    <select id="selectInquiry" parameterType="int" resultMap="inquiryResult">
+    	SELECT 
+            INQUIRY_ID,
+            CUST_ID,
+            TITLE,
+            CONTENT,
+            NVL(REG_DATE, SYSDATE) AS REG_DATE,
+            RESPONSE_CONTENT,
+            NVL(RESPONSE_DATE, SYSDATE) AS RESPONSE_DATE,
+            STATUS,
+            CATEGORY
+        FROM INQUIRY
+        WHERE INQUIRY_ID = #{inquiryId}
+    </select>
+    <select id="qaList" resultMap="inquiryResult">
+    	SELECT * FROM INQUIRY ORDER BY INQUIRY_ID
+    </select>
+    <update id="updateResponse" parameterType="com.spring_boot_dolls_ticket.project.model.InquiryVO">
+    	UPDATE INQUIRY
+    	SET RESPONSE_CONTENT = #{responseContent}, RESPONSE_DATE = SYSDATE, STATUS = #{status} WHERE INQUIRY_ID = #{inquiryId}    
+    </update>
+</mapper>	 

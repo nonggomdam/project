@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring_boot_dolls_ticket.project.dao.IReservationDAO">
+	
+	<resultMap id="ReservationList" type="com.spring_boot_dolls_ticket.project.model.ReservationVO">
+		<result property="reservationId" column="reservationId"/>
+		<result property="performanceId" column="performanceId"/>
+		<result property="custId" column="custId"/>
+		<result property="performanceDate" column="performanceDate"/>
+		<result property="reservationSeatInformation" column="reservationSeatInformation"/>
+		<result property="reservationStatus" column="reservationStatus"/>
+		<result property="firstChangeDate" column="firstChangeDate"/>
+		<result property="lastChangeDate" column="lastChangeDate"/>
+	</resultMap>
+	
+	<select id="getReservation" parameterType="com.spring_boot_dolls_ticket.project.model.ReservationVO"
+		resultType="com.spring_boot_dolls_ticket.project.model.ReservationVO">
+		SELECT
+			A.CUST_ID AS custId
+			,A.RESERVATION_STATUS AS reservationStatus
+			,A.RESERVATION_ID AS reservationId
+			,A.PERFORMANCE_ID AS performanceId
+			,A.PERFORMANCE_DATE AS performanceDate
+			,A.RESERVATION_SEAT_KIND_CD AS reservationSeatKindCd
+			,A.RESERVATION_SEAT_NUMBER AS reservationSeatNumber
+		FROM Reservation_Info_M A
+		WHERE 1=1
+		AND A.PERFORMANCE_ID = #{performanceId}  
+		AND A.CUST_ID = #{custId}
+		AND A.PERFORMANCE_DATE = TO_DATE(#{performanceDate}, 'YYYY-MM-DD HH24:MI')
+		AND A.RESERVATION_STATUS = 'Y'
+		AND A.RESERVATION_SEAT_KIND_CD = #{reservationSeatKindCd}
+		AND A.RESERVATION_SEAT_NUMBER = #{reservationSeatNumber}
+	</select>
+	
+	
+	<select id="reservationList" parameterType="com.spring_boot_dolls_ticket.project.model.ReservationVO" resultType="com.spring_boot_dolls_ticket.project.model.ReservationVO">
+		 SELECT
+		    A.CUST_ID AS custId
+		    ,A.RESERVATION_STATUS AS reservationStatus
+		    ,A.RESERVATION_ID AS reservationId
+		    ,A.PERFORMANCE_ID AS performanceId
+		    ,A.PERFORMANCE_DATE AS performanceDate2
+		    ,A.RESERVATION_SEAT_KIND_CD AS reservationSeatKindCd
+		    ,A.RESERVATION_SEAT_NUMBER AS reservationSeatNumber
+		    ,A.FIRST_CHANGE_DATE AS firstChangeDate
+		    ,B.PERFORMANCE_NAME  AS performanceName
+		    ,(B.PERFORMANCE_PRICE + 
+	          (SELECT seat_price 
+	         FROM PERFORMANCE_LOCATION_M 
+	         WHERE seat_kind_cd = A.RESERVATION_SEAT_KIND_CD 
+	         AND ROWNUM = 1)) AS totalPerformancePrice
+		    ,B.PERFORMANCE_IMAGE_PATH AS performanceImagePath
+		FROM Reservation_Info_M A
+		INNER JOIN Performance_Info_M B
+		ON A.PERFORMANCE_ID = B.PERFORMANCE_ID
+		WHERE A.CUST_ID = #{custId}
+		<if test="startDateStr != null and endDateStr != null" >
+			AND A.FIRST_CHANGE_DATE BETWEEN TO_DATE(#{startDateStr}, 'YYYYMMDD') AND TO_DATE(#{endDateStr}, 'YYYYMMDD') + 1
+	   	</if>
+	   	ORDER BY firstChangeDate DESC
+		OFFSET #{pageNbr} ROWS FETCH NEXT #{pageOffSet} ROWS ONLY 
+	</select>
+</mapper>
+	
+
+

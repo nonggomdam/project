@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring_boot_dolls_ticket.project.dao.IMemberDAO">
+
+	<!-- ID 중복 확인 -->
+	<select id="idCheck" resultType="string" parameterType="string">
+		SELECT CUST_ID FROM Member WHERE CUST_ID =#{id}
+	</select>
+	
+	<!-- 회원 등록 -->
+	<insert id="insertMember" parameterType="com.spring_boot_dolls_ticket.project.model.MemberVO">
+    	INSERT INTO Member(CUST_ID, CUST_PASSWORD, CUST_NAME, CUST_GENDER, CUST_EMAIL, CUST_PHONENUMBER)
+    	VALUES(#{custId}, #{custPassWord}, #{custName}, #{custGender}, #{custEmail}, #{custPhoneNumber})
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="loginCheck" parameterType="String" resultType="String">
+    SELECT CUST_PASSWORD FROM Member WHERE CUST_ID = #{id}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="map" resultType="java.util.List">
+    	SELECT CUST_ID FROM Member
+    	WHERE CUST_NAME = #{name}
+    	<if test="email != null and email != ''">
+        	AND CUST_EMAIL = #{email}
+    	</if>
+    	<if test="phone != null and phone != ''">
+        	AND CUST_PHONENUMBER = #{phone}
+    	</if>
+	</select>
+	
+	<!-- 비밀번호 찾기 전 아이디 확인 -->
+	<select id="checkIdInDatabase" parameterType="string" resultType="boolean">
+    SELECT COUNT(*) > 0 FROM member WHERE id = #{id}
+	</select>
+	
+	<update id="updatePassword" parameterType="map">  
+    UPDATE Member 
+    SET CUST_PASSWORD = #{newPassword} 
+    WHERE CUST_NAME = #{name} AND CUST_EMAIL = #{email}
+	</update>
+	
+	<select id ="selectCustInfo"  resultType="com.spring_boot_dolls_ticket.project.model.MemberVO" parameterType="string" >
+		SELECT 
+			CUST_ID as custId
+			,CUST_PASSWORD as custPassWord
+			,CUST_NAME as custName
+			,CUST_EMAIL as custEmail
+			,CUST_PHONENUMBER as custPhoneNumber
+			,CUST_ZIPCODE as custZipcode
+			,CUST_ADDRESS as custAddress
+			,CUST_DETAILADDRESS as custDetailAddress
+		FROM MEMBER
+		WHERE CUST_ID = #{custId}
+</select>
+
+ <update id="updateMember"  parameterType="com.spring_boot_dolls_ticket.project.model.MemberVO">
+	UPDATE MEMBER
+		SET 
+			CUST_ID = #{custId}		  
+		    ,CUST_NAME = #{custName}
+		    ,CUST_EMAIL = #{custEmail}
+		    ,CUST_PHONENUMBER = #{custPhoneNumber}
+		    ,CUST_ZIPCODE = #{custZipcode}
+		    ,CUST_ADDRESS = #{custAddress}
+		    ,CUST_DETAILADDRESS = #{custDetailAddress}
+		WHERE CUST_ID = #{custId}
+</update>
+	<!-- 관리자 여부 확인 -->
+	<select id="findAdministratorYnById" parameterType="string" resultType="string">
+	    SELECT ADMINISTRATOR_YN 
+	    FROM Member 
+	    WHERE CUST_ID = #{id}
+	</select>
+
+	
+
+ <update id="updateReservation"  parameterType="com.spring_boot_dolls_ticket.project.model.ReservationVO">
+	UPDATE RESERVATION_INFO_M 
+	SET RESERVATION_STATUS = 'N'
+	    ,RESERVATION_SEAT_NUMBER = 0
+	WHERE RESERVATION_ID = #{reservationId}
+</update>
+	<resultMap id="memberList" type="com.spring_boot_dolls_ticket.project.model.MemberVO">
+		<result property="custId" column="CUST_ID" />
+		<result property="administratorYN" column="ADMINISTRATOR_YN" />
+		<result property="custPhoneNumber" column="CUST_PHONENUMBER" />
+		<result property="custEmail" column="CUST_EMAIL" />
+	</resultMap>
+	<select id="listAllMember" resultMap="memberList">
+		SELECT * FROM MEMBER
+	</select>
+</mapper>	 

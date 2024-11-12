@@ -1,0 +1,65 @@
+@charset "UTF-8";
+@font-face {
+   font-family: 'TheJamsil5Bold';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+   font-weight: 500; /*이미 위에서 5Bold 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+
+.navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000000; /* 배경을 검은색으로 변경 */
+            height : 100px;
+            padding: 10px;
+            font-family: 'TheJamsil5Bold', sans-serif;
+        }
+        .navbar a {
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            color: #c4c0c0;
+        }
+        .navbar .categories a {
+            margin: 0 30px;
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .navbar .categories a:hover {
+            color: #c4c0c0; /* 카테고리 링크에 마우스를 올리면 밝은 회색으로 변경 */
+        }
+        .navbar .categories {
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #000000;
+        }
+        
+     	.content {
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .mainLogo{
+            text-decoration: none;
+            margin-left: -30px;
+        }
+
+        .mainLogo a{
+            color: #b3a18c;
+            font-size: 50px;
+            font-weight: bold;
+        }
+        .member{
+            width: 300px;
+        }
+        
+        .member a{
+            color: #ffffff;
+            float : right;
+            font-size:20px;
+        }

@@ -1,0 +1,118 @@
+@charset "UTF-8";
+@font-face {
+   font-family: 'TheJamsil2Light';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil2Light.woff2') format('woff2');
+   font-weight: 200; /*이미 위에서 2Light 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+@font-face {
+   font-family: 'TheJamsil5Bold';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+   font-weight: 500; /*이미 위에서 5Bold 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+@font-face {
+ font-family: 'TheJamsil3Regular';
+ src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil3Regular.woff2') format('woff2');
+ font-weight: 300; /*이미 위에서 3Regular 이렇게 정해져서 font-weight 의미 없음*/
+ font-style: normal;
+}
+footer {
+	margin-top: 50px;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    height: 280px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+	background-color: #eeeeee;
+}
+#footerMenuItem {
+	border-bottom: 1px solid #f6f6f6;
+    height: 70px;
+    position: relative;
+    text-align: center;
+}
+#footerMenuItem li {
+	display: inline-block;
+    line-height: 78px;
+    font-size: 15px;
+    padding: 0 30px;
+    position: relative;
+    border-right: #ddd;
+}
+#footerMenuItem li:last-child { border-right: none; }
+#footerMenuBox a {
+	font-family: 'TheJamsil2Light', sans-serif;
+	text-decoration: none;
+	color: black;
+}
+#footerMenuBox a:hover {
+	opacity: 0.8;
+	cursor: pointer;
+}
+#companyInfo {
+	padding-top: 30px;
+	clear: both;
+	width: 1100px;
+	display: flex;
+	justify-content: space-between;
+	padding-bottom: 30px;
+	background-color: #eeeeee;
+}
+#siteName { 
+	font-family: 'TheJamsil5Bold', sans-serif;
+    font-size: 50px; 
+	padding: 30px 0 0 50px;
+}
+#siteName a {
+	text-decoration: none;
+	color: #b3a18c; 
+}
+#info {
+	font-family: 'TheJamsil2Light', sans-serif;
+}
+.name {
+	font-family: 'TheJamsil3Regular', sans-serif;
+}
+#info p {
+	font-size: 14px;
+	padding-top: 8px;
+}
+#info a {
+	margin-left: 15px;
+	text-decoration: none;
+	color: black;
+}
+.tel {
+	font-size: 40px;
+    color: #b3a18c;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+#cs {
+	font-family: 'TheJamsil2Light', sans-serif;
+}
+.tel dt {
+	float: left;
+    width: 45px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.tel dd {
+	clear: right;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.05em;
+}
+.goTop a {
+    position: fixed;
+    bottom: 280px;
+    right: 40px;
+    z-index: 999;
+    cursor: pointer;
+}
+.goTop a.on{
+  cursor: pointer;
+  bottom: 0;
+}

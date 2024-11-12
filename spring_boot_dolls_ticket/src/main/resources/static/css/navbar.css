@@ -1,0 +1,112 @@
+@charset "UTF-8";
+@font-face {
+   font-family: 'TheJamsil5Bold';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+   font-weight: 500; /*이미 위에서 5Bold 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+
+body {
+    padding-top: 80px; /* navbar 높이만큼 여백 추가 */
+}
+
+.navbar {
+position: fixed;
+top: 0;
+justify-content: space-between;
+align-items: center;
+display : flex;
+background-color: #274b3a; /* 배경을 검은색으로 변경 */
+height : 80px;
+padding: 10px;  
+z-index : 1000;
+width: 100%;
+font-family: 'TheJamsil5Bold', sans-serif;
+transition: background-color 0.3s, height 0.3s; /* 부드러운 전환 효과 */ 
+}
+
+.navbar a {
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 15px;
+}
+
+.navbar a:hover {
+    color: #c4c0c0;
+}
+
+.navbar .categories {
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: #000000; */
+}
+
+div .categories {
+	background-color: transparent;
+}
+
+.content {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.mainLogo {
+    text-decoration: none;
+    margin-left: -30px;
+}
+
+.mainLogo a {
+    color: #b3a18c;
+    font-size: 50px;
+}
+
+.member {
+    width: 300px;
+}
+
+.member a {
+    color: #ffffff;
+    float: right;
+    font-size: 15px;
+}
+
+/* 일반 사용자 스타일 */
+.navbar.user .categories a {
+    margin: 0 60px;
+    color: #ffffff;
+    font-size: 26px;
+}
+
+/* 관리자 스타일 */
+.navbar.admin .categories a {
+    margin: 0 30px;
+    color: #ffffff;
+    font-size: 28px;
+}
+
+/* 공통 카테고리 링크 hover 효과 */
+.navbar .categories a:hover {
+    color: #c4c0c0;
+}
+
+/* 스크롤 시 변경될 스타일 */
+.navbar.scrolled {
+    background-color: #eeeeee; 
+    height: 60px; 
+}
+.navbar.scrolled a:hover {
+    color: #c4c0c0;
+}
+/* 네브바 링크에 스크롤 시 색상 변경 적용 */
+.navbar.scrolled a {
+    color: #274b3a; 
+}
+
+.navbar.scrolled .categories a {
+    color: #8f735b;
+}
+
+.navbar.scrolled .categories a:hover {
+    color: #b3a18c;
+}
+

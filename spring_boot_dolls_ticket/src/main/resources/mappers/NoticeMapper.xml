@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring_boot_dolls_ticket.project.dao.INoticeDAO">
+    <resultMap id="noticeResult" type="com.spring_boot_dolls_ticket.project.model.NoticeVO">
+	    <result column="NOTICE_NO" property="noticeNo" />
+	    <result column="NOTICE_TITLE" property="noticeTitle" />
+	    <result column="NOTICE_CONTENT" property="noticeContent" />
+	    <result column="FIRST_CHANGE_DATE" property="firstChangeDate" />
+	    <result column="LAST_CHANGE_DATE" property="lastChangeDate" />
+	    <result column="NOTICE_TYPE" property="noticeType" />
+	    <result column="HIT_NUM" property="hitNum" />
+    </resultMap>
+    <select id="listAllNotice" resultMap="noticeResult">
+    	SELECT * FROM NOTICE ORDER BY LAST_CHANGE_DATE DESC
+    </select>
+    <insert id="insertNotice" parameterType="com.spring_boot_dolls_ticket.project.model.NoticeVO">
+    	INSERT INTO NOTICE (
+            NOTICE_TITLE,
+            NOTICE_CONTENT,
+            FIRST_CHANGE_DATE,
+            LAST_CHANGE_DATE,
+            NOTICE_TYPE,
+            HIT_NUM
+        ) VALUES (
+            #{noticeTitle},
+            #{noticeContent},
+            SYSDATE,
+            SYSDATE,
+            #{noticeType},
+            0
+        )
+    </insert>
+    <select id="detailViewNotice" parameterType="int" resultMap="noticeResult">
+    	SELECT * FROM NOTICE WHERE NOTICE_NO = #{noticeNo}
+    </select>
+    <update id="updateNotice" parameterType="com.spring_boot_dolls_ticket.project.model.NoticeVO">
+    	UPDATE NOTICE
+	    SET NOTICE_TITLE = #{noticeTitle},
+	        NOTICE_TYPE = #{noticeType},
+	        NOTICE_CONTENT = #{noticeContent},
+	        LAST_CHANGE_DATE = SYSDATE
+	    WHERE NOTICE_NO = #{noticeNo}
+    </update>
+    <delete id="deleteNotice" parameterType="int">
+    	DELETE FROM NOTICE WHERE notice_no = #{noticeNo}
+    </delete>
+    <update id="updateHitNum" parameterType="int">
+    	UPDATE NOTICE
+	    SET HIT_NUM = HIT_NUM + 1
+	    WHERE NOTICE_NO = #{noticeNo}
+    </update>
+</mapper>	 

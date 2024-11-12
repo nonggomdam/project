@@ -1,0 +1,14 @@
+  CREATE TABLE assignment_order_detail
+(
+	order_no             VARCHAR2(60) NOT NULL ,
+	sqno                 VARCHAR2(3) NOT NULL ,
+	price                NUMBER(10) NULL ,
+	first_change_date    DATE NULL ,
+	last_change_date     DATE NULL ,
+	NOTICE_ID            VARCHAR2(20 BYTE) NULL ,
+	ASSIGNMENT_SQNO      VARCHAR2(3) NULL 
+);
+
+
+ALTER TABLE assignment_order_detail
+	ADD CONSTRAINT  XPKassignment_order_detail PRIMARY KEY (order_no,sqno);

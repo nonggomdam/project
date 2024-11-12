@@ -1,0 +1,84 @@
+@charset "UTF-8";
+@font-face {
+ font-family: 'TheJamsil3Regular';
+ src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil3Regular.woff2') format('woff2');
+ font-weight: 300; /*이미 위에서 3Regular 이렇게 정해져서 font-weight 의미 없음*/
+ font-style: normal;
+}
+@font-face {
+   font-family: 'TheJamsil2Light';
+   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil2Light.woff2') format('woff2');
+   font-weight: 200; /*이미 위에서 2Light 이렇게 정해져서 font-weight 의미 없음*/
+   font-style: normal;
+}
+		* {margin:0 auto;}
+
+        .container {
+        	display: flex;
+            width: 80%;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .main-content {
+            width: 80%;
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            margin-bottom: 15px;
+        }
+        .info-box {
+            padding: 20px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            font-family: 'TheJamsil3Regular', sans-serif;
+        }
+        .info-box .title {
+        	font-size: 18px;
+            font-weight: bold;
+        }
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background-color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #555;
+        }
+        .customer-service {
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ccc;
+        }     
+        .customer-service p{
+            font-family: 'TheJamsil3Regular', sans-serif;
+        }
+        .categories {
+            margin-top: 6px;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+        .categories ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .categories ul li {
+            padding: 10px 0;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+        }
+        .categories ul li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .categories ul li a:hover {
+            text-decoration: underline;
+        }

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.spring_boot_dolls_ticket.project.dao.ITransferDAO">
+ 	<select id="showTransInfo" parameterType="string"  resultType="com.spring_boot_dolls_ticket.project.model.TransferVO">
+		select a.cust_id as custId 
+		     , b.performance_kind_cd as performanceKindCd
+		     , b.performance_name as performanceName
+		     , b.performance_image_path as performanceImagePath
+		     , b.performance_id as performanceId
+		     , case when c.reservation_seat_kind_cd='R' then b.performance_price_r
+                    else b.performance_price_s 
+                end as price
+		     <!-- , c.performance_date as performanceDate -->
+		     , to_char(c.performance_date, 'YYYY-MM-DD AM HH:MI') as performanceDate
+		     , c.reservation_seat_kind_cd as reservationSeatKindCd
+		     , c.reservation_seat_number as reservationSeatNumber
+		     , c.reservation_id as reservationId
+		  from member a
+		     , performance_info_m b
+		     , reservation_info_m c
+		 where a.cust_id = c.cust_id
+		   and b.performance_id = c.performance_id
+		   and a.cust_id=#{custId}
+ 	</select>
+ 	
+ 	<select id="maxNoticeId" resultType="string">
+ 		select nvl(max(NOTICE_ID), 10999) +1 
+ 		  from ASSIGNMENT_NOTICE_BOARD_M
+ 	</select>
+ 	
+ 	<insert id="insertAssignmentNotice" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentNoticeBoardVO">
+ 		INSERT INTO ASSIGNMENT_NOTICE_BOARD_M (NOTICE_ID, NOTICE_TITLE, CUST_ID, ASSIGNMENT_STATUS, HIT, FIRST_CHANGE_DATE, LAST_CHANGE_DATE)
+		VALUES ( 
+			  #{noticeId}  
+			, #{noticeTitle}
+			, #{custId}
+			, #{assignmentStatus}
+			, #{hit}
+			, sysdate
+			, sysdate 
+		)	
+ 	</insert>
+ 	
+ 	<select id="selectAssignmentNotice" resultType="com.spring_boot_dolls_ticket.project.model.AssignmentNoticeBoardVO">
+ 		select notice_id as noticeId
+ 		     , notice_title as noticeTitle
+ 		     , cust_id as custId
+ 		     , assignment_status as assignmentStatus
+ 		     , hit as hit
+ 		     , first_change_Date as firstChangeDate
+		  from ASSIGNMENT_NOTICE_BOARD_M
+		 <if test="noticeId != null" > 
+		 where notice_id = #{noticeId}
+		 </if>
+	  order by notice_id desc
+ 	</select>
+ 	
+ 	<insert id="insertAssignmentTicket" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentTicketVO">
+ 		INSERT INTO ASSIGNMENT_TICKET (NOTICE_ID, ASSIGNMENT_SQNO, reservation_id, RECEIVE_CUST_ID, SOLD_YN, FIRST_CHANGE_DATE, LAST_CHANGE_DATE)
+		VALUES ( 
+			  #{noticeId}  
+			, (select lpad(nvl(max(ASSIGNMENT_SQNO), '0')+1, 3, '0') from ASSIGNMENT_TICKET where notice_id = #{noticeId} )  
+			, #{reservationId}
+			, #{receiveCustId, jdbcType=VARCHAR}
+			, 'N'
+			, sysdate
+			, sysdate 
+		)	
+ 	</insert>
+ 	
+ 	<select id="selectSeatInfo" parameterType="com.spring_boot_dolls_ticket.project.model.TransferReservationInfoVO" resultType="com.spring_boot_dolls_ticket.project.model.TransferReservationInfoVO">
+ 		select performance_id as performanceId
+ 			 , reservation_seat_kind_cd as reservationSeatKindCd
+             , reservation_seat_number as reservationSeatNumber
+ 		  from reservation_info_m
+ 		 where reservation_id=#{reservationId}
+ 		   and cust_id=#{custId}
+ 		   and reservation_status='Y'
+ 	</select>
+ 	
+ 	
+ 	<select id="selectListTicketAndPerformance" parameterType="string" resultType="com.spring_boot_dolls_ticket.project.model.Transfer2VO">
+		select c.reservation_seat_kind_cd as reservationSeatKindCd
+			 , c.reservation_seat_number as reservationSeatNumber		
+ 			 , c.performance_id as performanceId
+ 			 , a.sold_yn as soldYn
+ 			 , a.assignment_sqno as assignmentSqno
+     		 , b.performance_kind_cd as performanceKindCd
+             , b.performance_name as performanceName
+             , b.performance_image_path as performanceImagePath
+		     , case when c.reservation_seat_kind_cd='R' then b.performance_price_r
+                    else b.performance_price_s 
+                end as price
+             <!-- , c.performance_date as performanceDate -->
+             , to_char(c.performance_date, 'YYYY-MM-DD AM HH:MI') as performanceDate
+          from assignment_ticket a, performance_info_m b, reservation_info_m c
+         where b.performance_id=c.performance_id
+           and a.reservation_id=c.reservation_id
+           and notice_id=#{noticeId}
+ 	</select>
+ 	
+ 	<update id="updateHit" parameterType="string">
+ 		update ASSIGNMENT_NOTICE_BOARD_M 
+ 		   set HIT = HIT+1
+ 		 where notice_id=#{noticeId}  
+ 	</update>
+ 	
+ 	<update id="updateAssignmentTicket" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentTicketVO">
+		update assignment_ticket 
+		   set receive_cust_id=#{receiveCustId},
+		   	   sold_yn='Y',
+		       last_change_date=sysdate
+		 where notice_id=#{noticeId} 
+		   and ASSIGNMENT_SQNO=#{assignmentSqno}
+ 	</update>
+ 	
+ 	<update id="updateCustId" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentTicketVO">
+ 		update reservation_info_m
+   		   set cust_id=#{receiveCustId},
+   		       last_change_date=sysdate
+   		 where reservation_id = (select reservation_id
+                                       from assignment_ticket
+                                      where notice_id=#{noticeId}
+                                        and ASSIGNMENT_SQNO=#{assignmentSqno})
+ 	</update>
+ 	
+ 	<select id="selectEmail" resultType="string" parameterType="string">
+ 		select cust_email
+		  from member
+         where cust_id=#{custId}
+ 	</select>
+ 	
+ 	
+ 	<select id="showInfoInEmail" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentTicket2VO" resultType="com.spring_boot_dolls_ticket.project.model.Transfer2VO">
+           select c.reservation_seat_kind_cd as reservationSeatKindCd
+			    , c.reservation_seat_number as reservationSeatNumber
+                <!-- , c.performance_date as performanceDate -->
+                , to_char(c.performance_date, 'YYYY-MM-DD AM HH:MI') as performanceDate
+		        , case when c.reservation_seat_kind_cd='R' then b.performance_price_r
+                  else b.performance_price_s 
+                  end as price
+                , c.reservation_id as reservationId
+                , b.performance_name as performanceName
+                , b.performance_image_path as performanceImagePath
+                , a.assignment_sqno as assignmentSqno
+             from assignment_ticket a, performance_info_m b, reservation_info_m c
+            where b.performance_id=c.performance_id
+              and a.reservation_id=c.reservation_id
+              and a.notice_id=#{noticeId}
+              and a.ASSIGNMENT_SQNO in
+         <foreach collection="assignmentSqnos" item="assignmentSqno" index="idx" separator="," open="(" close=")">
+    				#{assignmentSqno}
+    	 </foreach> 
+ 	</select>
+ 	
+ 	<insert id="insertAssignmentOrder" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderVO">
+ 		INSERT INTO ASSIGNMENT_ORDER (ORDER_NO, ITEM_CONTENT, AMOUNT, STATUS_CD, SETTLE_DT, RECEIVE_CUST_ID, MAIN_IMAGE, FIRST_CHANGE_DATE, LAST_CHANGE_DATE)
+		VALUES ( 
+			  #{orderNo}  
+			, #{itemContent, jdbcType=VARCHAR}
+			, #{amount}
+			, #{statusCd, jdbcType=VARCHAR}
+			, #{settleDt, jdbcType=VARCHAR}
+			, #{receiveCustId, jdbcType=VARCHAR}
+			, #{mainImage, jdbcType=VARCHAR}
+			, sysdate
+			, sysdate 
+		)
+ 	</insert>
+ 	
+ 	<insert id="insertAssignmentOrderDetail" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderDetailVO">
+ 		INSERT INTO ASSIGNMENT_ORDER_DETAIL (ORDER_NO, SQNO, NOTICE_ID, ASSIGNMENT_SQNO, PRICE, FIRST_CHANGE_DATE, LAST_CHANGE_DATE)
+		VALUES ( 
+			  #{orderNo}  
+			, (select lpad(nvl(max(SQNO), '0')+1, 3, '0') from assignment_order_detail where ORDER_NO = #{orderNo} )
+			, #{noticeId}
+			, #{assignmentSqno}
+			, #{price}
+			, sysdate
+			, sysdate 
+		)
+ 	</insert>
+ 	
+ 	<select id="orderVerification" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderVO" resultType="int">
+ 		select amount
+	      from assignment_order
+         where order_no=#{orderNo}
+           and status_cd=#{statusCd}
+ 	</select>
+ 	
+ 	<update id="updateFail" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderVO">
+ 		update assignment_order 
+   		   set status_cd='F' 
+   		     , payment_key=#{paymentKey}
+   		     , LAST_CHANGE_DATE=sysdate
+         where order_no=#{orderNo}
+ 	</update>
+ 	
+ 	<update id="updateSuccess" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderVO">
+ 		update assignment_order 
+   		   set status_cd='S' 
+   		     , payment_key=#{paymentKey}
+   		     , card_no=#{cardNo}
+   		     , settle_method=#{settleMethod}
+   		     , card_type=#{cardType}
+   		     , LAST_CHANGE_DATE=sysdate
+         where order_no=#{orderNo}
+ 	</update>
+ 	
+ 	<select id="selectSoldYn" parameterType="string" resultType="com.spring_boot_dolls_ticket.project.model.AssignmentTicketVO">
+		select b.sold_yn as soldYn
+		     , b.notice_id as noticeId
+		     , b.assignment_sqno as assignmentSqno
+		  from assignment_order_detail a, assignment_ticket b
+		 where a.notice_id=b.notice_id
+		   and a.assignment_sqno=b.assignment_sqno
+		   and a.order_no=#{orderNo}
+ 	</select>
+ 	
+ 	<update id="updateAlreadySold" parameterType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderVO">
+ 		update assignment_order 
+   		   set status_cd='A' 
+   		     , payment_key=#{paymentKey}
+   		     , LAST_CHANGE_DATE=sysdate
+         where order_no=#{orderNo}
+ 	</update>
+ 	
+ 	<select id="selectListAssignmentOrder" parameterType="string" resultType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderVO">
+ 		select order_no as orderNo
+ 		     , to_char(last_change_date, 'yyyy. MM. dd') as settleDt
+ 		     , amount as amount
+ 		     , item_content as itemContent
+ 		     , card_no as cardNo
+ 		     , card_type as cardType
+ 		     , main_image as mainImage
+ 		     , settle_method as settleMethod 
+	      from assignment_order
+         where receive_cust_id=#{receiveCustId}
+           and status_cd='S'
+      order by first_change_date desc
+ 	</select>
+ 	
+ 	<select id="selectListAssignmentOrderDetail" parameterType="string" resultType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderDetailVO">
+ 		select d.performance_kind_cd as performanceKindCd
+ 		     , d.performance_name as performanceName
+ 		     , c.performance_date as performanceDate
+ 		     , c.reservation_seat_kind_cd as reservationSeatKindCd
+ 		     , c.reservation_seat_number as reservationSeatNumber
+ 		     , c.reservation_id as reservationId
+ 		     , a.price as price
+ 		     , d.performance_image_path as performanceImagePath
+		  from assignment_order_detail a
+             , assignment_ticket b  
+             , reservation_info_m c
+             , performance_info_m d 
+         where a.notice_id = b.notice_id
+           and a.assignment_sqno = b.assignment_sqno
+           and b.reservation_id = c.reservation_id
+           and c.performance_id = d.performance_id
+           and a.order_no = #{orderNo}
+ 	</select>
+ 	
+ 	
+ 	<select id="selectAssignmentOrder" resultType="com.spring_boot_dolls_ticket.project.model.AssignmentOrderVO">
+ 		select order_no as orderNo
+ 		     , last_change_date as lastChangeDate
+ 		     , amount as amount
+ 		     , card_no as cardNo
+ 		     , card_type as cardType
+ 		     , settle_method as settleMethod 
+	      from assignment_order
+         where receive_cust_id=#{receiveCustId}
+           and order_no=#{orderNo}
+ 	</select> 
+ 	
+ 	
+ 	<update id="updateAssignmentStatus" parameterType="string">
+	   	update assignment_notice_board_m 
+           set assignment_status='B'
+         where notice_id  = #{noticeId}
+           and 0 = (
+                 	select count(*)
+               	      from assignment_ticket
+               	     where notice_id = #{noticeId}
+               		   and sold_yn = 'N'
+               	   )
+ 	</update>
+ 	
+ </mapper>

@@ -1,0 +1,15 @@
+  CREATE TABLE assignment_order
+(
+	order_no             VARCHAR2(60) NOT NULL ,
+	amount               NUMBER(10) NULL ,
+	status_cd            CHAR(1) NULL ,
+	receive_cust_id      VARCHAR2(20) NULL ,
+	item_content         VARCHAR2(100) NULL ,
+	settle_dt            VARCHAR2(8) NULL,
+    payment_key          VARCHAR2(32) NULL,
+    first_change_date    DATE NULL ,
+	last_change_date     DATE NULL 
+);
+
+ALTER TABLE assignment_order
+	ADD CONSTRAINT  XPKassignment_order PRIMARY KEY (order_no);

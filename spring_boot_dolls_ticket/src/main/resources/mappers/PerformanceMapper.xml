@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.spring_boot_dolls_ticket.project.dao.IPerformanceDAO">
+
+	<resultMap id="performanceList" type="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
+		<result property="performanceId" column="performanceId"/>
+		<result property="performanceKindCd" column="performanceKindCd"/>
+		<result property="performanceRatingCode" column="performanceRatingCode"/>
+		<result property="performanceName" column="performanceName"/>
+		<result property="performancePrice" column="performancePrice"/>
+		<result property="performanceZipcode" column="performanceZipcode"/>
+		<result property="performanceAddress" column="performanceAddress"/>
+		<result property="performanceDetailAddress" column="performanceDetailAddress"/>
+		<result property="reservationOpenExpectedDate" column="reservationOpenExpectedDate"/>
+		<result property="performanceImagePath" column="performanceImagePath"/>
+		<result property="firstChangeDate" column="firstChangeDate"/>
+		<result property="lastChangeDate" column="lastChangeDate"/>
+		<result property="maxPerformanceDate" column="maxPerformanceDate"/>
+		<result property="minPerformanceDate" column="minPerformanceDate"/>
+		<result property="reservationStatusYCount" column="reservationStatusYCount"/>
+	</resultMap>
+	
+	<resultMap id="performanceScheduleList" type="com.spring_boot_dolls_ticket.project.model.PerformanceScheduleVO">
+		<result property="performanceId" column="performanceId"/>
+		<result property="performanceLocationId" column="performanceLocationId"/>
+		<result property="performanceDate" column="performanceDate"/>
+		<result property="firstChangeDate" column="firstChangeDate"/>
+		<result property="lastChangeDate" column="lastChangeDate"/>
+	</resultMap>
+	
+		<resultMap id="performanceSeatList" type="com.spring_boot_dolls_ticket.project.model.PerformanceSeatVO">
+		<result property="performanceLocationId" column="performanceLocationId"/>
+		<result property="performanceLocationNm" column="performanceLocationNm"/>
+		<result property="seatKindCd" column="seatKindCd"/>
+		<result property="seatNumber" column="seatNumber"/>
+		<result property="seatPrice" column="seatPrice"/>
+		<result property="seatStatus" column="seatStatus"/>
+		<result property="firstChangeDate" column="firstChangeDate"/>
+		<result property="lastChangeDate" column="lastChangeDate"/>
+	</resultMap>
+	<!-- 공연 정보 조회 -->
+	<!-- 11-07 김태우 수정 performanceprice 셀렉트 추가 -->
+	<select id="detailViewPerformance" parameterType="string" resultType="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
+		SELECT PERFORMANCE_ID as performanceId
+         , PERFORMANCE_KIND_CD as performanceKindCd
+         , PERFORMANCE_RATING_CODE as performanceRatingCode
+         , PERFORMANCE_NAME as performanceName
+         , PERFORMANCE_PRICE_R as performancePriceR
+         , PERFORMANCE_PRICE as performancePrice
+         , PERFORMANCE_ZIPCODE as performanceZipcode
+         , PERFORMANCE_ADDRESS as performanceAddress
+         , PERFORMANCE_DETAILADDRESS as performanceDetailAddress
+         , PERFORMANCE_DATE1 as performanceDate1
+         , RESERVATION_OPEN_EXPECTED_DATE as reservationOpenExpectedDate
+         , PERFORMANCE_TIME as performanceTime
+         , PERFORMANCE_PRICE_S as performancePriceS
+         , PERFORMANCE_DATE2 as performanceDate2
+         , PERFORMANCE_IMAGE_PATH as performanceImagePath
+         , PERFORMANCE_INFORMATION_IMAGE_PATH as performanceInformationImagePath
+         , FIRST_CHANGE_DATE as firstChangeDate
+         , LAST_CHANGE_DATE as lastChangeDate
+         , PERFORMANCE_LOCATION_ID as performanceLocationId
+        FROM PERFORMANCE_INFO_M WHERE PERFORMANCE_ID=#{performanceId}    
+	</select>
+	
+	<select id="getEventById" resultType="com.spring_boot_dolls_ticket.project.model.PerformanceVO" parameterType="string">
+	    SELECT RESERVATION_OPEN_EXPECTED_DATE as reservationOpenExpectedDate
+	    FROM PERFORMANCE_INFO_M
+	    WHERE PERFORMANCE_ID = #{performanceId}
+	</select>
+	<resultMap id="performanceResult" type="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
+		<result property="performanceId" column="PERFORMANCE_ID"></result>
+		<result property="performanceKindCd" column="PERFORMANCE_KIND_CD"></result>
+		<result property="performanceRatingCode" column="PERFORMANCE_RATING_CODE"></result>
+		<result property="performanceName" column="PERFORMANCE_NAME"></result>
+		<result property="performancePriceR" column="PERFORMANCE_PRICE_R"></result>
+		<result property="performancePriceS" column="PERFORMANCE_PRICE_S"></result>
+		<result property="performanceZipcode" column="PERFORMANCE_ZIPCODE"></result>
+		<result property="performanceAddress" column="PERFORMANCE_ADDRESS"></result>
+		<result property="performanceDetailAddress" column="PERFORMANCE_DETAILADDRESS"></result>
+		<result property="performanceDate1" column="PERFORMANCE_DATE1"></result>
+		<result property="performanceDate2" column="PERFORMANCE_DATE2"></result>
+		<result property="performanceTime" column="PERFORMANCE_TIME"></result>
+		<result property="reservationOpenExpectedDate" column="RESERVATION_OPEN_EXPECTED_DATE"></result>
+		<result property="performanceImagePath" column="PERFORMANCE_IMAGE_PATH"></result>
+		<result property="performanceInformationImagePath" column="PERFORMANCE_INFORMATION_IMAGE_PATH"></result>
+		<result property="firstChangeDate" column="FIRST_CHANGE_DATE"></result>
+		<result property="lastChangeDate" column="LAST_CHANGE_DATE"></result>
+	</resultMap>
+	<!-- 공연 리스트 조회 -->
+	<select id="listAllPerformance" resultMap="performanceResult">
+		SELECT * FROM PERFORMANCE_INFO_M ORDER BY PERFORMANCE_ID
+	</select>
+	<!-- 공연 정보 수정 -->
+	<update id="updatePerformance" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
+		UPDATE PERFORMANCE_INFO_M SET PERFORMANCE_KIND_CD = #{performanceKindCd}, PERFORMANCE_RATING_CODE = #{performanceRatingCode}, PERFORMANCE_NAME = #{performanceName}, PERFORMANCE_PRICE_R = #{performancePriceR}, PERFORMANCE_PRICE_S = #{performancePriceS}, PERFORMANCE_DATE1 = #{performanceDate1}, PERFORMANCE_DATE2 = #{performanceDate2}, PERFORMANCE_TIME = #{performanceTime}, RESERVATION_OPEN_EXPECTED_DATE = #{reservationOpenExpectedDate}, LAST_CHANGE_DATE = SYSDATE, PERFORMANCE_PRICE = #{performancePriceR}, PERFORMANCE_LOCATION_ID = #{performanceLocationId} WHERE PERFORMANCE_ID = #{performanceId}
+	</update>
+	<!-- 공연 정보 삭제 -->
+	<delete id="deletePerformance" parameterType="string">
+		DELETE FROM PERFORMANCE_INFO_M WHERE PERFORMANCE_ID = #{performanceId}
+	</delete>
+	<!-- 공연 정보 삽입 구문 -->
+	<insert id="insertPerformance" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceVO" useGeneratedKeys="true" keyProperty="performanceId">
+	    INSERT INTO PERFORMANCE_INFO_M (
+	        PERFORMANCE_KIND_CD, PERFORMANCE_RATING_CODE, PERFORMANCE_NAME,
+	        PERFORMANCE_PRICE_R, PERFORMANCE_PRICE_S, PERFORMANCE_DATE1, PERFORMANCE_DATE2, PERFORMANCE_TIME,
+	        RESERVATION_OPEN_EXPECTED_DATE, FIRST_CHANGE_DATE, LAST_CHANGE_DATE, PERFORMANCE_PRICE, PERFORMANCE_LOCATION_ID
+	    ) VALUES (
+	        #{performanceKindCd}, #{performanceRatingCode}, #{performanceName},
+	        #{performancePriceR}, #{performancePriceS}, #{performanceDate1}, #{performanceDate2}, #{performanceTime},
+	        #{reservationOpenExpectedDate}, SYSDATE, SYSDATE, #{performancePriceR}, #{performanceLocationId}
+	    )
+	</insert>
+	<!-- 공연 스케줄 정보 테이블에 삽입하는 구문 -->
+	<insert id="insertPerformanceSchedule" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceScheduleVO">
+	    INSERT INTO PERFORMANCE_SCHEDULE_D (
+	        PERFORMANCE_ID, PERFORMANCE_LOCATION_ID, PERFORMANCE_DATE, FIRST_CHANGE_DATE, LAST_CHANGE_DATE
+	    ) VALUES (
+	        #{performanceId}, #{performanceLocationId}, #{performanceDate}, SYSDATE, SYSDATE
+	    )
+	</insert>
+	<!-- 기존 공연 스케줄 삭제 구문 -->
+	<delete id="deletePerformanceSchedulesByPerformanceId" parameterType="String">
+	    DELETE FROM PERFORMANCE_SCHEDULE_D
+	    WHERE PERFORMANCE_ID = #{performanceId}
+	</delete>
+	
+	<!-- 카테고리 page -->
+	<!-- 김태우 11월 06일 수정 -->
+	<select id="selectPerformance" resultMap="performanceList">
+		SELECT 
+	        A.PERFORMANCE_ID AS performanceId
+	        ,A.performance_kind_cd AS performanceKindCd
+	        ,A.performance_rating_code AS performanceRatingCode
+	        ,A.performance_name AS performanceName
+	        ,A.performance_price AS performancePrice
+	        ,A.performance_zipcode AS performanceZipcode 
+	        ,A.performance_address AS performanceAddress
+	        ,A.performance_detailaddress AS performanceDetailAddress
+	        ,A.reservation_open_expected_date AS reservationOpenExpectedDate
+	        ,A.performance_image_path AS performanceImagePath
+	        ,A.first_change_date AS firstChangeDate
+	        ,A.last_change_date AS lastChangeDate
+	        , (SELECT MAX(PERFORMANCE_DATE) FROM PERFORMANCE_SCHEDULE_D WHERE PERFORMANCE_ID = A.PERFORMANCE_ID) AS maxPerformanceDate
+	        , (SELECT MIN(PERFORMANCE_DATE) FROM PERFORMANCE_SCHEDULE_D WHERE PERFORMANCE_ID = A.PERFORMANCE_ID) AS minPerformanceDate
+	    FROM performance_info_m A 
+	    order by reservationOpenExpectedDate ASC
+	</select>
+	
+	<!-- 11월5일 selectRanking 추가 -->
+	<select id="selectRanking" resultMap="performanceList">
+		SELECT 
+		    COUNT(CASE WHEN B.RESERVATION_STATUS = 'Y' THEN 1 END) AS reservationStatusYCount,
+		    A.PERFORMANCE_ID AS performanceId,
+		    A.performance_kind_cd AS performanceKindCd,
+		    A.performance_rating_code AS performanceRatingCode,
+		    A.performance_name AS performanceName,
+		    A.performance_price AS performancePrice,
+		    A.performance_zipcode AS performanceZipcode, 
+		    A.performance_address AS performanceAddress,
+		    A.performance_detailaddress AS performanceDetailAddress,
+		    A.reservation_open_expected_date AS reservationOpenExpectedDate,
+		    A.performance_image_path AS performanceImagePath,
+		    A.first_change_date AS firstChangeDate,
+		    A.last_change_date AS lastChangeDate,
+		    (SELECT MAX(PERFORMANCE_DATE) FROM PERFORMANCE_SCHEDULE_D WHERE PERFORMANCE_ID = A.PERFORMANCE_ID) AS maxPerformanceDate,
+		    (SELECT MIN(PERFORMANCE_DATE) FROM PERFORMANCE_SCHEDULE_D WHERE PERFORMANCE_ID = A.PERFORMANCE_ID) AS minPerformanceDate
+		FROM performance_info_m A 
+		INNER JOIN RESERVATION_INFO_M B ON A.PERFORMANCE_ID = B.PERFORMANCE_ID
+		GROUP BY 
+		    A.PERFORMANCE_ID,
+		    A.performance_kind_cd,
+		    A.performance_rating_code,
+		    A.performance_name,
+		    A.performance_price,
+		    A.performance_zipcode, 
+		    A.performance_address,
+		    A.performance_detailaddress,
+		    A.reservation_open_expected_date,
+		    A.performance_image_path,
+		    A.first_change_date,
+		    A.last_change_date
+		ORDER BY reservationStatusYCount DESC
+	</select>
+	
+	
+	
+	<select id="selectPerformanceDate" resultMap="performanceScheduleList" parameterType="string" >
+	 	SELECT 
+		    PERFORMANCE_ID AS performanceId
+		    ,PERFORMANCE_LOCATION_ID AS performanceLocationId 
+		    ,PERFORMANCE_DATE AS performanceDate
+		    ,FIRST_CHANGE_DATE AS firstChangeDate
+		    ,LAST_CHANGE_DATE AS lastChangeDate
+		FROM performance_schedule_d
+		WHERE PERFORMANCE_ID = #{performanceId}
+	</select>
+	
+	<select id="selectPerformanceSeatInfoList" resultMap="performanceSeatList" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceSeatVO" >
+		select 
+		    A.PERFORMANCE_LOCATION_ID as performanceLocationId
+		    ,PERFORMANCE_LOCATION_NM AS performanceLocationNm
+		    ,A.SEAT_KIND_CD as seatKindCd
+		    ,A.SEAT_NUMBER as seatNumber
+		    ,A.SEAT_PRICE + (SELECT performance_price FROM performance_info_m WHERE PERFORMANCE_ID = B.PERFORMANCE_ID) as seatPrice
+		    --,'N' AS seatStatus
+	        ,CASE WHEN (SELECT COUNT(RESERVATION_ID) 
+	        			FROM RESERVATION_INFO_M 
+	                    WHERE PERFORMANCE_ID = #{performanceId} 
+	                    AND TO_CHAR(PERFORMANCE_DATE, 'YYYYMMDDHH24MI') = #{performanceDate}
+	                    AND RESERVATION_SEAT_KIND_CD = A.SEAT_KIND_CD
+	                    AND RESERVATION_SEAT_NUMBER = A.SEAT_NUMBER ) = 1 THEN 'Y'
+	                    ELSE 'N' END AS seatStatus
+		FROM PERFORMANCE_LOCATION_M A
+	    INNER JOIN performance_schedule_d B
+	    ON A.PERFORMANCE_LOCATION_ID = B.PERFORMANCE_LOCATION_ID
+		WHERE B.PERFORMANCE_ID = #{performanceId}
+		AND  TO_CHAR(B.PERFORMANCE_DATE, 'YYYYMMDDHH24MI') = #{performanceDate}
+		ORDER BY A.SEAT_KIND_CD ASC, A.SEAT_NUMBER ASC
+	</select>
+	<resultMap id="PerformanceLocationMap" type="com.spring_boot_dolls_ticket.project.model.PerformanceSeatVO">
+	    <result property="performanceLocationId" column="PERFORMANCE_LOCATION_ID" />
+	    <result property="performanceLocationNm" column="PERFORMANCE_LOCATION_NM" />
+	</resultMap>
+	<!-- 공연장 리스트 불러오기 -->
+	<select id="locationList" resultMap="PerformanceLocationMap">
+	    SELECT DISTINCT PERFORMANCE_LOCATION_ID, PERFORMANCE_LOCATION_NM
+	    FROM PERFORMANCE_LOCATION_M
+	</select>
+	<!-- 관리자 공연 상세 정보 페이지에서 공연 정보 테이블에 저장된 공연장 ID와 공연장 정보 테이블의 공연장 ID 일치하는 공연장 가져오기 -->
+	<select id="getLocation" resultMap="PerformanceLocationMap">
+		SELECT pl.PERFORMANCE_LOCATION_ID, pl.PERFORMANCE_LOCATION_NM
+		FROM PERFORMANCE_LOCATION_M pl
+		WHERE pl.PERFORMANCE_LOCATION_ID = #{performanceLocationId}
+		FETCH FIRST 1 ROWS ONLY
+	</select>
+	<select id="getLatestEvent" resultType="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
+    SELECT PERFORMANCE_ID AS performanceId,
+           PERFORMANCE_KIND_CD AS performanceKindCd,
+           PERFORMANCE_RATING_CODE AS performanceRatingCode,
+           PERFORMANCE_NAME AS performanceName,
+           PERFORMANCE_PRICE_R AS performancePriceR,
+           PERFORMANCE_ZIPCODE AS performanceZipcode,
+           PERFORMANCE_ADDRESS AS performanceAddress,
+           PERFORMANCE_DETAILADDRESS AS performanceDetailAddress,
+           PERFORMANCE_DATE1 AS performanceDate1,  
+           PERFORMANCE_DATE2 AS performanceDate2,  
+           RESERVATION_OPEN_EXPECTED_DATE AS reservationOpenExpectedDate,
+           PERFORMANCE_TIME AS performanceTime,
+           PERFORMANCE_PRICE_S AS performancePriceS
+    FROM PERFORMANCE_INFO_M 
+    ORDER BY PERFORMANCE_ID 
+    FETCH FIRST 1 ROWS ONLY
+</select>
+<select id="getRankedPerformances" resultType="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
+    SELECT PERFORMANCE_ID as performanceId
+         , PERFORMANCE_KIND_CD as performanceKindCd
+         , PERFORMANCE_RATING_CODE as performanceRatingCode
+         , PERFORMANCE_NAME as performanceName
+         , PERFORMANCE_PRICE_R as performancePriceR
+         , PERFORMANCE_ZIPCODE as performanceZipcode
+         , PERFORMANCE_ADDRESS as performanceAddress
+         , PERFORMANCE_DETAILADDRESS as performanceDetailAddress
+         , PERFORMANCE_DATE1 as performanceDate1
+         , RESERVATION_OPEN_EXPECTED_DATE as reservationOpenExpectedDate
+         , PERFORMANCE_TIME as performanceTime
+         , PERFORMANCE_PRICE_S as performancePriceS
+         , PERFORMANCE_DATE2 as performanceDate2
+         , PERFORMANCE_IMAGE_PATH as performanceImagePath
+         , CLICK_COUNT as clickCount  <!-- 클릭 수 추가 -->
+    FROM PERFORMANCE_INFO_M
+    ORDER BY CLICK_COUNT DESC
+</select>
+	<select id="selectGeneratedId" resultType="string">
+	    SELECT PERFORMANCE_ID 
+	    FROM PERFORMANCE_INFO_M 
+	    WHERE ROWID = (SELECT MAX(ROWID) FROM PERFORMANCE_INFO_M)
+	</select>
+	<!-- 클릭 별 랭킹 정령 -->
+<update id="incrementClickCount" parameterType="String">
+    UPDATE PERFORMANCE_INFO_M
+    SET CLICK_COUNT = COALESCE(CLICK_COUNT, 0) + 1
+    WHERE PERFORMANCE_ID = #{performanceId}
+</update>
+	<!-- 이미지 경로 업데이트 구문 -->
+	<update id="updateImgPath" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
+	    UPDATE PERFORMANCE_INFO_M
+	    SET PERFORMANCE_IMAGE_PATH = #{performanceImagePath},
+	        PERFORMANCE_INFORMATION_IMAGE_PATH = #{performanceInformationImagePath}
+	    WHERE PERFORMANCE_ID = #{performanceId}
+	</update>
+	
+	<select id="selectPerformanceSeatInfo" resultType="com.spring_boot_dolls_ticket.project.model.PerformanceSeatVO" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceSeatVO" >
+		select 
+		    A.PERFORMANCE_LOCATION_ID as performanceLocationId
+		    ,PERFORMANCE_LOCATION_NM AS performanceLocationNm
+		    ,A.SEAT_KIND_CD as seatKindCd
+		    ,A.SEAT_NUMBER as seatNumber
+		    ,A.SEAT_PRICE + (SELECT performance_price FROM performance_info_m WHERE PERFORMANCE_ID = B.PERFORMANCE_ID) as seatPrice
+		    ,'N' AS seatStatus 
+		FROM PERFORMANCE_LOCATION_M A
+	    INNER JOIN performance_schedule_d B
+	    ON A.PERFORMANCE_LOCATION_ID = B.PERFORMANCE_LOCATION_ID
+		WHERE B.PERFORMANCE_ID = #{performanceId}
+		AND  TO_CHAR(B.PERFORMANCE_DATE, 'YYYYMMDDHH24MI') = #{performanceDate}
+	    AND A.SEAT_KIND_CD || A.SEAT_NUMBER = #{seatKindCd} || #{seatNumber}
+	    
+	</select>
+	
+	<insert id="insertReservationInfo" parameterType="com.spring_boot_dolls_ticket.project.model.ReservationVO">
+		
+		INSERT INTO RESERVATION_INFO_M (
+		    RESERVATION_ID, 
+		    PERFORMANCE_ID, 
+		    CUST_ID, 
+		    PERFORMANCE_DATE, 
+		    RESERVATION_SEAT_KIND_CD,
+		    RESERVATION_SEAT_NUMBER, 
+		    RESERVATION_STATUS, 
+		    FIRST_CHANGE_DATE, 
+		    LAST_CHANGE_DATE
+		) 
+		VALUES (
+		    ( select 'R0' || TO_CHAR(MAX(TO_NUMBER(SUBSTR(RESERVATION_ID, 2)))+1) from RESERVATION_INFO_M) ,         
+		    #{performanceId},
+		    #{custId},
+		    TO_DATE(#{performanceDate}, 'YYYY-MM-DD HH24:MI'),
+		    #{reservationSeatKindCd},
+		    #{reservationSeatNumber},
+		    'Y',
+		    SYSDATE,         
+		    SYSDATE          
+		)
+	</insert>
+</mapper>

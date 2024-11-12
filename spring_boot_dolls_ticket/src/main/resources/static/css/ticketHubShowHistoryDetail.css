@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+* {margin:0 auto;}
+
+*,
+*::before,
+*::after {
+    box-sizing:content-box;
+}
+
+body {
+    padding-top: 95px; /* navbar 높이만큼 여백 추가 */
+}
+
+#wrapper, .banner, #box {
+    max-width: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+#wrapper {
+   width:100%;
+   text-align:center;
+   line-height:28px;
+   margin-bottom:200px;
+}
+
+.bigDiv {
+	width:900px;
+	margin-top:100px;
+	text-align:left;
+	font-weight:bold;	
+}
+
+.fDiv {
+	font-size:30px;
+}
+
+.sDiv {
+	width:900px;
+	border:3px solid #eeeeee;
+	text-align:left;
+	margin-top:30px;
+	border-radius:15px;
+	box-shadow: -3px 2px 3px rgba(238, 238, 238, 0.5);
+}
+
+.tDiv {
+	font-size:21px;
+	font-weight:bold;
+	padding:30px;
+}
+
+.fSpan {
+	font-weight:normal;
+	font-size:15px;
+	color:gray;
+}
+
+.sSpan {
+	float:right;
+	font-weight:normal;
+	font-size:20px;
+	color:#20B2AA;
+}
+
+.inner-div {
+	font-size:21px;
+	border:2px solid #eeeeee;
+	width:90%;
+	padding:20px;
+	border-radius:10px;
+	margin-bottom:20px;
+	font-weight:normal;
+}
+
+.banner {
+    background-color: #f3e8d2;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top:-10px;
+    color:#4a2f27;
+    /* font-weight:bold;  */
+}
+
+
+.text-inline {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    white-space: nowrap; 
+}
+
+.text-box {
+    background-color: #f5e8d0;
+    padding: 10px 10px;
+    transform: rotate(-1deg);
+    display: inline-block;
+    /* border-top-left-radius:30px; */
+    border-bottom-left-radius:30px; 
+    border-bottom-right-radius:30px;
+    color:#a22110;
+}
+
+
+.small-text {
+    font-size: 30px;
+    /* font-weight: bold; */
+    transform: rotate(2deg);
+    animation: slideDown 1s ease-out forwards;
+}
+
+
+.hide-and-slide {
+    opacity: 0;
+    transform: translateX(-20px); 
+    animation: hideAndSlide 1s ease-out forwards;
+    animation-delay: 1s; 
+}
+
+.large-text {
+    font-size: 30px;
+    font-weight: bold;
+    transform: rotate(-1deg);
+}
+
+
+.text-box2 {
+    background-color: #274b3a;
+    padding: 10px 10px;
+    transform: rotate(-5deg);
+    display: inline-block;
+    border-top-left-radius:30px;
+    border-bottom-left-radius:30px; 
+    border-top-right-radius:30px;
+    color:white;
+}
+
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px); 
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes hideAndSlide {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px); 
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); 
+    }
+}
