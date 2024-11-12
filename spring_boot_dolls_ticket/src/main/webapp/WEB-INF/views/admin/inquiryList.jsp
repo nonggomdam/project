@@ -36,7 +36,7 @@
 				        </c:when>
 				        <c:otherwise>
 				            <c:forEach items="${inquiryList}" var="inquiry" varStatus="status">
-				                <tr id="${inquiry.inquiryId}" class="inquiryRow" style="cursor:pointer; display: ${status.index < 5 ? 'table-row' : 'none'};">
+				                <tr id="${inquiry.inquiryId}" class="inquiryRow" style="cursor:pointer;">
 				                    <td>${inquiry.inquiryId}</td>
 				                    <td>
 				                    	<c:choose>

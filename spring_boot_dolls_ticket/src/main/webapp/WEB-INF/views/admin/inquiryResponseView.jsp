@@ -8,57 +8,69 @@
 		<title>관리자 1:1 문의 답변 페이지</title>
 		<c:import url="/WEB-INF/views/layout/adminHead.jsp"/>
 		<c:import url="/WEB-INF/views/layout/top.jsp"/>
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/inquiry.css'/>">
 	</head>
 	<body>
 		<div class="wrapper">
 			<h3>문의 내역</h3>
-			<div class="inquiry-detail">
-				<div class="inquiry-item">
-			        <span class="value">${inquiry.status}</span>
-			    </div>
-			    <div class="inquiry-item">
-			        <span class="value">${inquiry.title}</span>
-			    </div>
-			    <div class="inquiry-item">
-			    	<span class="value">
-			    		<c:choose>
+						<table id="inquiry-detail">
+			    <tr>
+			        <th>제목</th>
+			        <td>${inquiry.title}</td>
+			    </tr>
+			    <tr>
+			        <th>문의 유형</th>
+			        <td>
+			            <c:choose>
 			                <c:when test="${inquiry.category == 'GENERAL'}">일반 문의</c:when>
 			                <c:when test="${inquiry.category == 'ACCOUNT'}">계정 관련</c:when>
 			                <c:when test="${inquiry.category == 'BILLING'}">결제 및 청구</c:when>
 			                <c:when test="${inquiry.category == 'REFUND'}">환불 요청</c:when>
 			                <c:when test="${inquiry.category == 'OTHER'}">기타 문의</c:when>
 			            </c:choose>
-			    	</span>&nbsp;&nbsp;
-			        <span class="value"><fmt:formatDate value="${inquiry.regDate}" pattern="YYYY년 MM월 dd일" /></span>
-			    </div>
-			    <div class="inquiry-item">
-			    	<span class="value">${inquiry.content}</span>&nbsp;&nbsp;
-			    </div>
-			    <c:if test="${not empty inquiry.responseContent}">
-			        <div class="inquiry-item">
-			            <p class="value">${inquiry.responseContent}</p>
-			        </div>
-			        <div class="inquiry-item">
-			            <span class="label">답변 날짜</span>
-			            <span class="value"><fmt:formatDate value="${inquiry.responseDate}" pattern="YYYY년 MM월 dd일" /></span>
-			        </div>
-			    </c:if>
-				<c:if test="${empty inquiry.responseContent}">
-		            <div class="inquiry-item">
-		                <span>답변 작성</span>
-		                <form method="post" action="<c:url value='/admin/updateResponse'/>">
-		                    <input type="hidden" name="inquiryId" value="${inquiry.inquiryId}">
-<%-- 		                    <input type="hidden" name="custId" value="${inquiry.custId}">
-		                    <input type="hidden" name="title" value="${inquiry.title}">
-		                    <input type="hidden" name="content" value="${inquiry.content}">
-		                    <input type="hidden" name="regDate" value="${inquiry.regDate}">
-		                    <input type="hidden" name="category" value="${inquiry.category}"> --%>
-		                    <textarea name="responseContent" rows="4" cols="50"></textarea><br>
-		                    <button type="submit">답변 등록</button>
-		                </form>
-		            </div>
-		        </c:if>
-			</div>
+			        </td>
+			    </tr>
+			    <tr>
+			        <th>작성일</th>
+			        <td><fmt:formatDate value="${inquiry.regDate}" pattern="YYYY년 MM월 dd일" /></td>
+			    </tr>
+			    <tr>
+			        <th>문의 내용</th>
+			        <td>
+			            <div style="min-height: 160px;">
+			                ${inquiry.content}
+			            </div>
+			        </td>
+			    </tr>
+			    <c:choose>
+			        <c:when test="${not empty inquiry.responseContent}">
+			            <tr>
+			                <th>답변 내용</th>
+			                <td>
+			                    <div style="min-height: 80px;">
+			                        ${inquiry.responseContent}
+			                    </div>
+			                </td>
+			            </tr>
+			            <tr>
+			                <th>답변 날짜</th>
+			                <td><fmt:formatDate value="${inquiry.responseDate}" pattern="YYYY년 MM월 dd일" /></td>
+			            </tr>
+			        </c:when>
+			        <c:otherwise>
+			            <tr>
+			                <th>답변 작성</th>
+			                <td>
+				                <form method="post" action="<c:url value='/admin/updateResponse'/>">
+				                    <input type="hidden" name="inquiryId" value="${inquiry.inquiryId}">
+				                    <textarea name="responseContent" rows="4" style="width: 100%;"></textarea><br>
+				                    <button type="submit">답변 등록</button>
+				                </form>
+				            </td>
+			            </tr>
+			        </c:otherwise>
+			    </c:choose>
+			</table>
 			<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 		</div>
 	</body>

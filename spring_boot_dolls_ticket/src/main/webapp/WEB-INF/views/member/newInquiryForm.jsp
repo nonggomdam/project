@@ -9,18 +9,19 @@
 		<c:import url="/WEB-INF/views/layout/adminHead.jsp"/>
 		<c:import url="/WEB-INF/views/layout/top.jsp"/>
 		<script src="<c:url value='/js/newInquiry.js'/>"></script>
+		<link rel="stylesheet" type="text/css" href="<c:url value='/css/inquiry.css'/>">
 	</head>
 	<body>
 		<div class="wrapper">
 			<h3>1:1 문의 작성</h3>
 			<form id="newInquiryForm" method="POST" action="<c:url value='/member/insertInquiry'/>" enctype="multipart/form-data">
-				<table class="listTable">
+				<table id="inquiry-detail">
 					<tr>
-			            <th>문의 제목</th>
+			            <th>제목</th>
 			            <td><input type="text" name="title" required></td>
 			        </tr>
 			        <tr>
-			            <th>문의 분류</th>
+			            <th>문의 유형</th>
 			            <td>
 			                <select name="category" required>
 			                    <option value="GENERAL">일반 문의</option>
@@ -33,10 +34,10 @@
 			        </tr>
 			        <tr>
 			            <th>문의 내용</th>
-			            <td><textarea name="content" rows="15" style="width: 850px" required></textarea></td>
+			            <td><textarea name="content" rows="15" style="width: 100%" required></textarea></td>
 			        </tr>
 			    </table><br>
-				<input type="submit" value="등록 완료">
+				<input id="status" type="submit" value="등록 완료">
 			</form>
 			<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 		</div>
