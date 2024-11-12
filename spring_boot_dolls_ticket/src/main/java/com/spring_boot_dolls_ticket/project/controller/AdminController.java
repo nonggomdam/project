@@ -62,7 +62,7 @@ public class AdminController {
 	}
 	// 관리자 상품 목록 페이지 이동 처리
 	@RequestMapping("/admin/performanceList")
-	public String adminPerformanceList(Model model) {
+	public String adminPerformanceList(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
 		
 		ArrayList<PerformanceVO> performanceList = performanceService.listAllPerformance();
 		

@@ -51,6 +51,7 @@
 					</c:choose>
 					</tbody>
 				</table>
+				<c:import url="/WEB-INF/views/admin/paging.jsp"/>
 			</div>
 			<c:import url="/WEB-INF/views/layout/footer.jsp"/>
 		</div>
