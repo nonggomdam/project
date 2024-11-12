@@ -326,10 +326,10 @@ h3 {
 			<div class="container">
 				<!-- 나의 무비스토리 영역 -->
 				<div class="movie-info">
-					<div class="section-title">나의 무비스토리</div>
+					<div class="section-title">나의 스토리</div>
 					<div class="stats">
 						<div class="stat-item">
-							<a href="/member/confirmation/0">${totalCnt}<label>관람한 공연</label></a>
+							<a href="/member/confirmation/0">${totalCnt}<label>티켓 예매 내역</label></a>
 						</div>
 						<div class="stat-item">
 							0 <label>관람평</label>
