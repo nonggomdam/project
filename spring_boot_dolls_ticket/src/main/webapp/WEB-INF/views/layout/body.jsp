@@ -105,11 +105,17 @@
 					<td class="ranking">
 						<div class="infocoming">
 							<a href="/performance/detailViewPerformance/${performanceOpenExpected.performanceId}"><img src="<c:url value='/image/${performanceOpenExpected.performanceImagePath}'/>">
-								<div class="donut-dday">D-${performanceOpenExpected.reservationDateInteger}</div>
+<!-- 11월 12일 14시 50분 수정 --><c:if test="${performanceOpenExpected.reservationDateInteger == 0}">
+							   <div class="donut-dday">D-day</div>
+							</c:if>
+							<c:if test="${performanceOpenExpected.reservationDateInteger != 0}">
+								 <div class="donut-dday">D-${performanceOpenExpected.reservationDateInteger}</div>
+							</c:if>
+<!-- 여기까지 -->
 								<div class="info-txt">
 									<p class="info-txt1">${performanceOpenExpected.performanceName}</p>
 									<p class="info-txt2"><fmt:formatDate value="${performanceOpenExpected.minPerformanceDate}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${performanceOpenExpected.maxPerformanceDate}" pattern="yyyy.MM.dd"/>
-									<p class="info-txt3"><br><fmt:formatDate value="${performanceOpenExpected.reservationOpenExpectedDate}" pattern="yyyy.MM.dd"/> 오픈예정</p>
+		<!-- 11월 12일 수정 -->		<p class="info-txt3"><br><fmt:formatDate value="${performanceOpenExpected.reservationOpenExpectedDate}" pattern="yyyy.MM.dd"/> 오픈예정</p>
 								</div></a>
 						</div>
 					</td>
