@@ -28,8 +28,9 @@
 		
 		
 		<div id="complete">
-			<p>양도받기가 완료되었습니다</p>
+			<p>결제가 완료되었습니다</p>
 			<p>회원님께서 등록하신 이메일 주소로 티켓 내역이 발송되었습니다.</p>
+			<a href="<c:url value='/transfer/assignHistory'/>"><h4 class="line">[나의 양수 결제내역 보기]</h4></a>
 		</div>
 	</div>
 	

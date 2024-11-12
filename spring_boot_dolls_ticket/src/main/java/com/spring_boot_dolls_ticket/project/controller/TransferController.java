@@ -213,12 +213,6 @@ public class TransferController {
 		return "transfer/ticketHubReceiveComplete";
 	}
 
-	@RequestMapping("/success2")
-	public String success(@RequestParam("orderId") String orderId, @RequestParam("amount") String amount,
-			@RequestParam("paymentKey") String paymentKey, Model model) throws Exception {
-
-		return "transfer/orderSuccess";
-	}
 
 	@RequestMapping("/success")
 	@Transactional
@@ -295,11 +289,23 @@ public class TransferController {
 		
 		String settleMethod = (String) jsonObject.get("method");
 		
-		JSONObject cardObject = (JSONObject) jsonObject.get("card");
-		String cardNumber = (String) cardObject.get("number");
-		String cardType = (String) cardObject.get("cardType");
+		String cardNumber = "";
+		String cardType = "";
+		
+		if("카드".equals(settleMethod)) {
+		
+			JSONObject cardObject = (JSONObject) jsonObject.get("card");
+			cardNumber = (String) cardObject.get("number");
+			cardType = (String) cardObject.get("cardType");
+			
+			System.out.println("@@@@@@@@@@@카드 번호: " + cardNumber);
+		}
+		
+		else if("간편결제".equals(settleMethod)) {
+			JSONObject cardObject = (JSONObject) jsonObject.get("easyPay");
+			cardType = (String) cardObject.get("provider");
+		}
 
-		System.out.println("@@@@@@@@@@@카드 번호: " + cardNumber);
 
 		responseStream.close();
 
@@ -389,80 +395,11 @@ public class TransferController {
 		transmail.setTo(tservice.selectEmail(receiveId));
 		mailservice.send(transmail);
 		// mailservice.scheduleEmailAsync(transmail);
+	
 		return "redirect:/transfer/success/ticketHubReceiveComplete";
 	}
 
-	@RequestMapping(value = "/confirm2")
-	public ResponseEntity<JSONObject> confirmPayment(@RequestBody String jsonBody) throws Exception {
-
-		JSONParser parser = new JSONParser();
-		String orderId;
-		String amount;
-		String paymentKey;
-		try {
-			// 클라이언트에서 받은 JSON 요청 바디입니다.
-			JSONObject requestData = (JSONObject) parser.parse(jsonBody);
-			paymentKey = (String) requestData.get("paymentKey");
-			orderId = (String) requestData.get("orderId");
-			amount = (String) requestData.get("amount");
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-		;
-
-		AssignmentOrderVO order = new AssignmentOrderVO();
-		order.setOrderNo(orderId);
-		order.setStatusCd("P");
-		int amt = tservice.orderVerification(order);
-
-		int settleAmt = Integer.valueOf(amount);
-
-		if (amt != settleAmt) {
-			// model.addAttribute("msg", "결제금액이 다릅니다.");
-			JSONObject obj = new JSONObject();
-			obj.put("code", "400");
-			obj.put("message", "결제금액이 다릅니다.");
-
-			return ResponseEntity.status(400).body(obj);
-			// return "transfer/ticketHubError";
-		}
-
-		JSONObject obj = new JSONObject();
-		obj.put("orderId", orderId);
-		obj.put("amount", amount);
-		obj.put("paymentKey", paymentKey);
-
-		// 토스페이먼츠 API는 시크릿 키를 Basic 인증의 사용자 ID로 사용하고, 비밀번호는 사용하지 않습니다.
-		// 비밀번호가 없다는 것을 알리기 위해 시크릿 키 뒤에 콜론을 추가합니다.
-		String widgetSecretKey = "test_gsk_docs_OaPz8L5KdmQXkzRz3y47BMw6";
-		Base64.Encoder encoder = Base64.getEncoder();
-		byte[] encodedBytes = encoder.encode((widgetSecretKey + ":").getBytes("UTF-8"));
-		String authorizations = "Basic " + new String(encodedBytes, 0, encodedBytes.length);
-
-		// 결제를 승인하면 결제수단에서 금액이 차감돼요.
-		URL url = new URL("https://api.tosspayments.com/v1/payments/confirm");
-		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-		connection.setRequestProperty("Authorization", authorizations);
-		connection.setRequestProperty("Content-Type", "application/json");
-		connection.setRequestMethod("POST");
-		connection.setDoOutput(true);
-
-		OutputStream outputStream = connection.getOutputStream();
-		outputStream.write(obj.toString().getBytes("UTF-8"));
-
-		int code = connection.getResponseCode();
-		boolean isSuccess = code == 200 ? true : false;
-
-		InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
-
-		// 결제 성공 및 실패 비즈니스 로직을 구현하세요.
-		Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
-		JSONObject jsonObject = (JSONObject) parser.parse(reader);
-		responseStream.close();
-
-		return ResponseEntity.status(code).body(jsonObject);
-	}
-
+	
 	@RequestMapping("/transfer/assignHistory")
 	public String assignHistory(HttpSession session, Model model) {
 

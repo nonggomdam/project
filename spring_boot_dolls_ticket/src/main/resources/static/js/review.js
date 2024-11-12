@@ -50,7 +50,7 @@ $(document).on('click', '.star-box a', function(e){
 		
 $(document).on('click', '#cancellation', function(e){	
 	e.preventDefault();
-	alert("관람후기 작성을 취소하시겠습니까?");
+	alert("작성을 취소하시겠습니까?");
 	history.go(0);
 });
 
@@ -66,12 +66,12 @@ $(document).on('click', '#insertReview', function(e){
     // 리뷰 내용 길이 검사
     const reviewMessage = $("#txtReview").val();
     if (getByteLength(reviewMessage) < 20) {
-        alert("리뷰 내용은 최소 20바이트 이상이어야 합니다.");
+        alert("내용은 최소 20바이트 이상이어야 합니다.");
         return;
     }
     
     $('#reviewForm').submit();
-	    alert("후기를 성공적으로 등록했습니다.");
+	    alert("성공적으로 등록했습니다.");
 });
 
 // 리뷰 삭제 버튼 클릭 이벤트
@@ -79,18 +79,18 @@ $(document).on('click', '.deleteReview', function(e) {
     e.preventDefault();
     var reviewId = $(this).data('review-id');
     
-    if (confirm('정말 이 후기를 삭제하시겠습니까?')) {
+    if (confirm('정말 삭제하시겠습니까?')) {
         // AJAX 요청을 통해 리뷰를 삭제
         $.ajax({
             url: '/performance/deleteReview',
             type: 'POST',
             data: { reviewSeq: reviewId },
             success: function(response) {
-                alert('후기가 성공적으로 삭제되었습니다.');
+                alert('성공적으로 삭제되었습니다.');
                 location.reload(); // 삭제 후 페이지 리로드
             },
             error: function() {
-                alert('후기 삭제에 실패했습니다.');
+                alert('삭제에 실패했습니다.');
             }
         });
     }

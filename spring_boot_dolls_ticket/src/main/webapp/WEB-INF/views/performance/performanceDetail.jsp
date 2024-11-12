@@ -113,7 +113,7 @@ $(document).ready(function() {
 		</div>
 		<div class="dt-04">
 			<a href="" id="describe"><span>상세정보</span></a>
-				<a href="" id="goReview"><span>관람후기<span class="dt-04-count">(${reviewList.size()})</span></span></a>
+				<a href="" id="goReview"><span>관람후기/기대평<span class="dt-04-count">(${reviewList.size()})</span></span></a>
 		</div>
 		<div class="detailPage-describe">
 			<div class="dt-05">
@@ -181,11 +181,11 @@ $(document).ready(function() {
 						</table>
 					</div>
 				</div>
-					<p class="dt05-tit">관람후기</p>
+					<p class="dt05-tit">관람후기/기대평</p>
 					<form id="reviewForm" name="reviewForm" method="post" action="<c:url value='/performance/insertReview'/>">
 						<input type="hidden" id="performanceId" name="performanceId" value="${pfm.performanceId}">
 						<div class="write">
-							<input type="checkbox" id="layer_popup"><label for="layer_popup">후기 작성하기</label>
+							<input type="checkbox" id="layer_popup"><label for="layer_popup">작성하기</label>
 							<div id="layer_bg">
 								<div id="popup">
 									<h2>${pfm.performanceName} <label for="layer_popup">X</label></h2>
@@ -201,14 +201,14 @@ $(document).ready(function() {
 										</div>
 									</div>
 									<div class="write-area">
-										<p class="w-tit">관람후기</p>
+										<p class="w-tit">관람후기/기대평</p>
 										<div class="w-write-box">
 											<textarea id="txtReview" name="reviewMessage"
 												placeholder="내용을 작성해주세요. (최소 20byte / 최대 2,000byte)"></textarea>
 										</div>
 									</div>
 									<div class="write-caution">
-										<p class="w-caution-tit">관람후기 작성 시 유의사항</p>
+										<p class="w-caution-tit">작성 시 유의사항</p>
 										<p class="w-caution-txt">FIVEDOLLS 게시판 운영 규정에 위반된다고 판단되는
 											글은 사전고지 없이 삭제될 수 있습니다.</p>
 										<ul class="w-caution-list">
