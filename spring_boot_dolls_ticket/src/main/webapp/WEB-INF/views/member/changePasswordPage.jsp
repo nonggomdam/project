@@ -9,34 +9,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비밀번호 변경</title>
     <c:import url="/WEB-INF/views/layout/top.jsp"/>
-	<c:import url="/WEB-INF/views/layout/head.jsp"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value='/css/font5.css'/>">
+	<c:import url="/WEB-INF/views/layout/head.jsp"></c:import>
     <script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
     <style>
 
-         .container {
+         .passchange {
             max-width: 500px;
-            margin: 100px auto;
-            padding: 20px;
+            margin-top : 230px;
+            margin-bottom: 230px;
+            padding: 50px;
             background-color: #ffffff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            height: 360px;
         }
-        h2 {
+        .passchange h2 {
             text-align: center;
             margin-bottom: 20px;
             font-size: 24px;
             color: #333;
         }
-        .form-group {
+        .chagneform {
             margin-bottom: 15px;
         }
-        label {
+        .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
+            margin-top:30px;
         }
-        input[type="password"] {
+        .form-group input[type="password"] {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -44,7 +46,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        button {
+        .passchange button {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -53,8 +55,9 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-top:40px;
         }
-        button:hover {
+        .passchange button:hover {
             background-color: #0056b3;
         }
         #result {
@@ -66,9 +69,9 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="passchange">
         <h2>비밀번호 변경</h2>
-        <form action="submitPasswordChange.jsp" method="post" id="passwordForm">
+        <form class="chagneform"action="<c:url value='/member/pwdChange'/> method="post" id="passwordForm">
             <!-- 비밀번호 변경 입력 필드 -->
             <div class="form-group">
                 <label for="newPassword">새 비밀번호</label>
@@ -87,10 +90,9 @@
             <!-- 결과 출력 -->
             <div id="result"></div>
         </form>
+        
     </div>
-
-
- 	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
+	<c:import url="/WEB-INF/views/layout/footer.jsp" />
 </body>
     <script>
         document.getElementById('passwordForm').addEventListener('submit', function(event) {
