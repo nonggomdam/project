@@ -59,14 +59,21 @@ h3 {
     border-bottom: none; /* 마지막 td의 아래 경계선 제거 */
 }
 .section tr {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	vertical-align: top;
 	border-bottom: 1px solid black;
 }
 .section td {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 	vertical-align: top;
 	border: 1px solid #ccc; /* 경계선 */
     padding: 8px; /* 패딩 추가 */
     text-align: left; /* 왼쪽 정렬 */
+    max-width: 150px;
 }
 .wrapper {
 	width: 940px;

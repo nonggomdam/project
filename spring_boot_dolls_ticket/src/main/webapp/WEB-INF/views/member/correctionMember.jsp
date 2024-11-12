@@ -36,12 +36,13 @@
 			</div>
 			<div>
 				<button
-					onclick="location.href='http://localhost:8080/member/correctionMember';">회원정보
+					onclick="location.href='<c:url value='/member/correctionMember'/>'">회원정보
 					변경</button>
 				<button
-					onclick="location.href='http://localhost:8080/member/confirmation/0';">예약확인/취소</button>
-				<button>공지사항</button>
-				<button>1:1문의</button>
+					onclick="location.href='<c:url value='/member/correctionMember'/>'">회원정보
+					변경</button>
+				<button onclick="location.href='<c:url value='/member/noticeList' />'">공지 사항</button>
+				<button onclick="location.href='<c:url value='/member/myInquiry' />'">1:1 문의</button>
 			</div>
 			<div class="service-center">
 				<h2>고객센터</h2>

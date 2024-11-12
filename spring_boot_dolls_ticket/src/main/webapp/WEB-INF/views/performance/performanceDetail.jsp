@@ -45,7 +45,7 @@ $(document).ready(function() {
     });
 });
 </script>
-<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8b9536e6724dcad202e98a2dcdaee950"></script>
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=1df0943899c83997c7b907c959ed39c1"></script>
 <script src="<c:url value='/js/ticketOpen.js'/>"></script>
 <script src="<c:url value='/js/review.js'/>"></script>	
 	</head>
