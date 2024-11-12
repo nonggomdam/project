@@ -43,10 +43,9 @@
 							                <c:when test="${member.administratorYN == 'N'}">일반 회원</c:when>
 						            	</c:choose>
 				                    </td>
+				                    <td>${member.custPhoneNumber}</td>
 				                    <td>${member.custEmail} </td>
-				                    <td>${member.title}</td>
-				                    <td>${member.custId}</td>
-				                    <td><fmt:formatDate value="${member.regDate}" pattern="yyyy년 MM월 dd일" /></td>
+				                    <td><fmt:formatDate value="${member.firstChangeDate}" pattern="yyyy년 MM월 dd일" /></td>
 				                </tr>
 				            </c:forEach>
 				        </c:otherwise>

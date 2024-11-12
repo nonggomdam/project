@@ -13,8 +13,8 @@
 	
 	<!-- 회원 등록 -->
 	<insert id="insertMember" parameterType="com.spring_boot_dolls_ticket.project.model.MemberVO">
-    	INSERT INTO Member(CUST_ID, CUST_PASSWORD, CUST_NAME, CUST_GENDER, CUST_EMAIL, CUST_PHONENUMBER)
-    	VALUES(#{custId}, #{custPassWord}, #{custName}, #{custGender}, #{custEmail}, #{custPhoneNumber})
+    	INSERT INTO Member(CUST_ID, CUST_PASSWORD, CUST_NAME, CUST_GENDER, CUST_EMAIL, CUST_PHONENUMBER, FIRST_CHANGE_DATE)
+    	VALUES(#{custId}, #{custPassWord}, #{custName}, #{custGender}, #{custEmail}, #{custPhoneNumber}, SYSDATE)
 	</insert>
 	
 	<!-- 로그인 -->
@@ -91,6 +91,7 @@
 		<result property="administratorYN" column="ADMINISTRATOR_YN" />
 		<result property="custPhoneNumber" column="CUST_PHONENUMBER" />
 		<result property="custEmail" column="CUST_EMAIL" />
+		<result property="firstChangeDate" column="FIRST_CHANGE_DATE" />
 	</resultMap>
 	<select id="listAllMember" resultMap="memberList">
 		SELECT * FROM MEMBER
