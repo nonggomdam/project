@@ -31,9 +31,10 @@
 	        </div>
 	        
 			
-			<div style="width:20%; text-align: right;" class="member">
+			<div style="width:20%; text-align: right; padding-right: 30px;" class="member">
 				<c:if test="${empty sessionScope.sid }">			
-					<a class="login" href="<c:url value='/member/loginForm'/>">로그인</a>					
+					<a class="login" href="<c:url value='/member/loginForm'/>">로그인</a>	
+					<a class="login" href="<c:url value='/member/joinForm'/>">회원가입</a>				
 				</c:if>
 						
 				<c:if test="${not empty sessionScope.sid }">
