@@ -380,8 +380,7 @@ h3 {
 					onclick="location.href='<c:url value='/member/correctionMember'/>'">회원정보
 					변경</button>
 				<button
-					onclick="location.href='<c:url value='/member/correctionMember'/>'">회원정보
-					변경</button>
+					onclick="location.href='<c:url value='/member/confirmation/0'/>'">예약확인/취소</button>
 				<button onclick="location.href='<c:url value='/member/noticeList' />'">공지 사항</button>
 				<button onclick="location.href='<c:url value='/member/myInquiry' />'">1:1 문의</button>
 			</div>
