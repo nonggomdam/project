@@ -96,6 +96,7 @@ public class MemberController {
 	@RequestMapping("/member/join")
 	public String join(MemberVO vo) {
 		memService.insertMember(vo);
+		System.out.println("Address: " + vo.getCustZipcode());
 		return "redirect:/member/signupSuccess"; // 회원가입 후에 로그인페이지로 이동
 	}
 	

@@ -11,6 +11,7 @@
 <script src="/js/jquery-3.7.1.min.js"></script>
 <script src="/js/join.js"></script>
 <script src="/js/idCheck.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 <body>
     <div class="main-signup">
@@ -75,8 +76,27 @@
                     <span class="signup-input">
                         <input id="signupEmail" type="text" name="custEmail"></input>
                     </span>
-
                 </div>
+                
+                <!-- 주소 입력 부분 -->
+				<div style="margin-top: 20px;">
+    				<h3>주소</h3>
+    				<span class="signup-input-address">
+        				<!-- 우편번호 입력 -->
+        				<input id="signupZipCode" type="text" name="custZipcode" placeholder="우편번호" readonly>
+        				<button id="zipcodeSearchBtn" type="button" onclick="searchPostcode()">우편번호 검색</button>
+    				</span>
+
+    				<span class="signup-input-address">
+        				<!-- 기본 주소 입력 -->
+        				<input id="signupAddress1" type="text" name="custAddress" placeholder="기본 주소"></input>
+    				</span>
+
+    				<span class="signup-input-address">
+        				<!-- 상세 주소 입력 -->
+        				<input id="signupAddress2" type="text" name="custDetailAddress" placeholder="상세 주소"></input>
+    				</span>
+				</div>
 
                 <div style="margin-top: 20px;">
                     <!--휴대전화-->

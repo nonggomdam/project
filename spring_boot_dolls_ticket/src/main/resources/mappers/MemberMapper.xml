@@ -13,8 +13,8 @@
 	
 	<!-- 회원 등록 -->
 	<insert id="insertMember" parameterType="com.spring_boot_dolls_ticket.project.model.MemberVO">
-    	INSERT INTO Member(CUST_ID, CUST_PASSWORD, CUST_NAME, CUST_GENDER, CUST_EMAIL, CUST_PHONENUMBER, FIRST_CHANGE_DATE)
-    	VALUES(#{custId}, #{custPassWord}, #{custName}, #{custGender}, #{custEmail}, #{custPhoneNumber}, SYSDATE)
+    	INSERT INTO Member(CUST_ID, CUST_PASSWORD, CUST_NAME, CUST_GENDER, CUST_EMAIL, CUST_PHONENUMBER, CUST_ZIPCODE , CUST_ADDRESS , CUST_DETAILADDRESS , FIRST_CHANGE_DATE)
+    	VALUES(#{custId}, #{custPassWord}, #{custName}, #{custGender}, #{custEmail}, #{custPhoneNumber},#{custZipcode, jdbcType=VARCHAR}, #{custAddress , jdbcType=VARCHAR}, #{custDetailAddress , jdbcType=VARCHAR}, SYSDATE)
 	</insert>
 	
 	<!-- 로그인 -->
