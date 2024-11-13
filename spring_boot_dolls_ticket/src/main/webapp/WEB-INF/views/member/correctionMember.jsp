@@ -150,7 +150,7 @@
 		if (!confirmed) {
 			event.preventDefault(); // '취소'를 눌렀을 때 폼 제출을 방지
 		} else {
-			window.location.href = "/member/passwordChange"; // 
+			window.location.href = "searchPwwd"; // 
 		}
 	}
 
