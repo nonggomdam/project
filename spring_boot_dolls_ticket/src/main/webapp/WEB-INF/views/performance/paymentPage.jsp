@@ -272,7 +272,6 @@ hr {
 				<img src="<c:url value='/image/${performanceInfo.performanceImagePath}'/>">
 				<div class="ticket-details">
 					<h2>${performanceInfo.performanceName}</h2>
-					<p style="margin-bottom:16px;">이용등급 : ${performanceInfo.performanceRatingCode}세</p>
 					<p style="font-weight: bold;"><br>뮤지컬 공연날짜</p>
 					<p>
 						<fmt:formatDate value="${performanceInfo.performanceDate}"
@@ -282,7 +281,12 @@ hr {
 							pattern="yyyy.MM.dd" />
 					</p>
 					<p style="font-weight: bold; margin-top:24px;"><br>공연 장소<br></p>
-					<p>${performanceInfo.performanceAddress}<br>${performanceInfo.performanceDetailAddress}</p>
+						<c:if test="${performanceInfo.performanceLocationId == 'SE0000001'}">
+                		  <p>공연장 정보 : 올림픽홀</p>
+		               </c:if>
+		               <c:if test="${performanceInfo.performanceLocationId == 'SE0000002'}">
+		                  <p>공연장 정보 : 샤롯데씨어터</p>
+		               </c:if>
 				</div>
 			</div>
 

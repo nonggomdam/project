@@ -87,7 +87,7 @@ input {
 					<p>공연장 정보 : 올림픽홀</p>
 				</c:if>
 				<c:if test="${performanceInfo.performanceLocationId == 'SE0000002'}">
-					<p>공연장 정보 : 샤롯데홀</p>
+					<p>공연장 정보 : 샤롯데씨어터</p>
 				</c:if>
 				</div>
 					<div style="display: inline-block; width: 20px; height: 20px; background-color: #5F9EA0; margin-top: 20px; margin-right: 8px;"></div>
