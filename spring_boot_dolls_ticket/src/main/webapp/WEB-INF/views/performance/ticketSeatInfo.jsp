@@ -197,7 +197,7 @@ input {
 							&& !$(this).hasClass('seat-checkDisabled')) {
 						var seatNumber = $(this).text();
 
-						if ($(this).hasClass('seat-selected')) {
+						if ($(this).hasClass('seat-selectedR')) {
 							//금액 해지
 							<c:forEach items="${performanceRSeatInfoList}" var="item">
 							if (seatNumber == '${item.seatKindCd}'
@@ -215,13 +215,13 @@ input {
 
 
 							// 좌석 선택 해제
-							$(this).removeClass('seat-selected');
+							$(this).removeClass('seat-selectedR');
 							selectedSeats = selectedSeats.filter(function(seat) {
 										return seat !== seatNumber;
 									});
 						} else {
 							// 좌석 선택
-							$(this).addClass('seat-selected');
+							$(this).addClass('seat-selectedR');
 							selectedSeats.push(seatNumber);
 
 							if (seatNumber.substr(0, 1) == "R") {
@@ -255,6 +255,7 @@ input {
 		// 초기화 버튼
 		$('#resetSeats').click(function() {
 			$('.seat-selection').removeClass('seat-selected');
+			$('.seat-selectionR').removeClass('seat-selectedR');
 			selectedSeats = [];
 			totalAmt = 0;
 			$('#selectedSeats').text('');

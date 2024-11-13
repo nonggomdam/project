@@ -369,14 +369,15 @@
 }
 #popup .w-tit {
     float: left;
-    width: 98px;
-    font-size: 15px;
+    font-size: 16px;
+    width: 110px;
     font-weight: bold;
+    padding-right: 10px;
 }
 #popup .star-tit {
-	margin-top: 20px;
-	float: left;
-    width: 98px;
+   margin-top: 20px;
+   float: left;
+    width: 110px;
     font-size: 16px;
     font-weight: bold;
 }

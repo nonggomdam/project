@@ -23,7 +23,7 @@
 					src="<c:url value='/image/m_banner1.jfif'/>">
 					<div class="slide-txt">
 						<p class="slide-tit">뮤지컬 [알라딘] 한국 초연 (ALADDIN The Musical)</p>
-						<p class="slide-detail">2024.11.11 ~ 2024.11.12</p>
+						<p class="slide-detail">2024.11.12 ~ 2024.11.13</p>
 					</div></a>
 			</div>
 			<div class="swiper-slide">
@@ -35,11 +35,11 @@
 					</div></a>
 			</div>
 			<div class="swiper-slide">
-				<a href="<c:url value='/performance/detailViewPerformance/P0011'/>"><img
+				<a href="<c:url value='/performance/detailViewPerformance/P0015'/>"><img
 					src="<c:url value='/image/m_banner3.jfif'/>">
 					<div class="slide-txt">
 						<p class="slide-tit">뮤지컬 〈젠틀맨스 가이드：사랑과 살인편〉</p>
-						<p class="slide-detail">2024.11.20 ~ 2024.11.21</p>
+						<p class="slide-detail">2024.11.21 ~ 2024.11.22</p>
 					</div></a>
 			</div>
 			<div class="swiper-slide">
@@ -89,7 +89,7 @@
 
 			
 			<div class="banner">
-				<a href="<c:url value='/performance/detailViewPerformance/P0006'/>"><img src="<c:url value='/image/킹키부츠.png'/>"></a>
+				<a href="<c:url value='/performance/detailViewPerformance/P0026'/>"><img src="<c:url value='/image/킹키부츠.png'/>"></a>
 			</div>
 			<h1 id="comming-soon" >TICKET COMING SOON</h1>
 			<table id="initialTable">

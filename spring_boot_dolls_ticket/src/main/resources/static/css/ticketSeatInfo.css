@@ -100,6 +100,9 @@
         .seat-selected {
             background-color: #497649;
         }
+        .seat-selectedR {
+            background-color: #497649;
+        }
         .seat-disabled {
             background-color: gray;
             cursor: not-allowed;

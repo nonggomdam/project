@@ -15,13 +15,13 @@
 				<div id="slidePanel">
 					<a href="<c:url value='/performance/detailViewPerformance/P0002'/>">
 					<img src= "<c:url value='/image/banner1.png'/>" class="slideImage"></a>
-					<a href="<c:url value='/performance/detailViewPerformance/P0004'/>">
+					<a href="<c:url value='/performance/detailViewPerformance/P0008'/>">
 					<img src= "<c:url value='/image/banner2.jfif'/>" class="slideImage"></a>
-					<a href="<c:url value='/performance/detailViewPerformance/P0011'/>">
+					<a href="<c:url value='/performance/detailViewPerformance/P0001'/>">
 					<img src= "<c:url value='/image/banner3.jfif'/>" class="slideImage"></a>
 					<a href="<c:url value='/performance/detailViewPerformance/P0006'/>">
 					<img src= "<c:url value='/image/banner4.jfif'/>" class="slideImage"></a>
-					<a href="<c:url value='/performance/detailViewPerformance/P0015'/>">
+					<a href="<c:url value='/performance/detailViewPerformance/P0017'/>">
 					<img src= "<c:url value='/image/banner5.png'/>" class="slideImage"></a>
 				</div>
 			</div> <!-- slideShowBox 끝 -->  
