@@ -432,8 +432,8 @@ h3 {
 				<thead>
 					<tr>
 						 <th style="width:20%;">상품명</th>
-                  <th style="width:8%;">좌석</th>
-                  <th style="width:15%;">금액</th>
+                  <th style="width:10%;">좌석</th>
+                  <th style="width:13%;">금액</th>
                   <th style="width:16%;">예매날짜</th>
                   <th style="width:16%;">공연날짜</th>
                   <th style="width:10%;">진행상태</th>
