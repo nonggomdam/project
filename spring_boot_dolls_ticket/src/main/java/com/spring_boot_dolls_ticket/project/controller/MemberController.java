@@ -133,7 +133,7 @@ public class MemberController {
 	public void getKakaoAuthUrl(HttpServletResponse response) throws Exception {
 	    String reqUrl = "https://kauth.kakao.com/oauth/authorize"
 	            + "?client_id=0672e740c19121be04471cca72ca8d44"
-	            + "&redirect_uri=http://localhost:8080/kakao/callback"
+	            + "&redirect_uri=http://110.234.32.143:8080/kakao/callback"
 	            + "&response_type=code";
 	    
 	    response.sendRedirect(reqUrl); // 카카오 인증 URL로 리다이렉트
@@ -175,7 +175,7 @@ public class MemberController {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=0672e740c19121be04471cca72ca8d44");  // REST API KEY
-            sb.append("&redirect_uri=http://localhost:8080/kakao/callback");     // 리디렉션 경로
+            sb.append("&redirect_uri=http://110.234.32.143:8080/kakao/callback");     // 리디렉션 경로
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -259,7 +259,7 @@ public class MemberController {
 
 	    String reqUrl = "https://nid.naver.com/oauth2.0/authorize"
 	            + "?client_id=M8tmkDymjlbYysnk7E5u"
-	            + "&redirect_uri=http://localhost:8080/naver/callback"
+	            + "&redirect_uri=http://110.234.32.143:8080/naver/callback"
 	            + "&response_type=code"
 	            + "&prompt=login"; // 로그인 화면 강제 표시;
 
