@@ -36,9 +36,10 @@ $(document).ready(function() {
     });
 });
 $(document).ready(function() {
-    $('#layer_popup').on('click', function() {
+    $('#layer_popup').on('click', function(event) {
     	var userId = "<%=userId%>";
 		if(userId == ""){
+			event.preventDefault();
         	confirm("로그인이 필요합니다.")
         	location.href = '/member/loginForm';
         }
