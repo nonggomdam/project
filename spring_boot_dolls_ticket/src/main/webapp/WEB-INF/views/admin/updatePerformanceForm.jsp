@@ -58,10 +58,10 @@
 					<tr>
 						<th>공연 종류</th>
 						<td>
-							<select name="performanceKindCd">
-								<option value="C">콘서트</option>
-								<option value="M">뮤지컬</option>
-							</select>
+						    <select name="performanceKindCd">
+						        <option value="C" ${performance.performanceKindCd == 'C' ? 'selected' : ''}>콘서트</option>
+						        <option value="M" ${performance.performanceKindCd == 'M' ? 'selected' : ''}>뮤지컬</option>
+						    </select>
 						</td>
 					</tr>
 					<tr>

@@ -55,9 +55,9 @@
             <div class="form-group row">
                 <button type="submit" id="submit" class="btn-primary btn-lg">확인 후 비밀번호 재설정</button>
             </div>
-           		
+           	<div id="resultContainer"></div>	
         </form>
     </div>
-    <div id="resultContainer"></div>
+ 
 </body>
 </html>
