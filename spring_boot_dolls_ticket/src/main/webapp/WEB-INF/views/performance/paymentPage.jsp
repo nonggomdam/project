@@ -282,10 +282,10 @@ hr {
 					</p>
 					<p style="font-weight: bold; margin-top:10px;"><br>공연 장소<br></p>
 						<c:if test="${performanceInfo.performanceLocationId == 'SE0000001'}">
-                		  <p>공연장 정보 : 올림픽홀</p>
+                		  <p>올림픽홀</p>
 		               </c:if>
 		               <c:if test="${performanceInfo.performanceLocationId == 'SE0000002'}">
-		                  <p>공연장 정보 : 샤롯데씨어터</p>
+		                  <p>샤롯데씨어터</p>
 		               </c:if>
 				</div>
 			</div>
