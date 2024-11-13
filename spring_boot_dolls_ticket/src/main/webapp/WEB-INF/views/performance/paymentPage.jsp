@@ -280,7 +280,7 @@ hr {
 						<fmt:formatDate value="${performanceInfo.performanceDate2}"
 							pattern="yyyy.MM.dd" />
 					</p>
-					<p style="font-weight: bold; margin-top:24px;"><br>공연 장소<br></p>
+					<p style="font-weight: bold; margin-top:10px;"><br>공연 장소<br></p>
 						<c:if test="${performanceInfo.performanceLocationId == 'SE0000001'}">
                 		  <p>공연장 정보 : 올림픽홀</p>
 		               </c:if>
