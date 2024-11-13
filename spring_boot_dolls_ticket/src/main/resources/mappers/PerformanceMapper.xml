@@ -103,7 +103,7 @@
 		DELETE FROM PERFORMANCE_INFO_M WHERE PERFORMANCE_ID = #{performanceId}
 	</delete>
 	<!-- 공연 정보 삽입 구문 -->
-	<insert id="insertPerformance" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceVO" useGeneratedKeys="true" keyProperty="performanceId">
+	<insert id="insertPerformance" parameterType="com.spring_boot_dolls_ticket.project.model.PerformanceVO">
 	    INSERT INTO PERFORMANCE_INFO_M (
 	        PERFORMANCE_KIND_CD, PERFORMANCE_RATING_CODE, PERFORMANCE_NAME,
 	        PERFORMANCE_PRICE_R, PERFORMANCE_PRICE_S, PERFORMANCE_DATE1, PERFORMANCE_DATE2, PERFORMANCE_TIME,
