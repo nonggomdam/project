@@ -43,7 +43,7 @@
 
 .right-section {
 	width: 40%;
-	height: 860px;
+	height: 880px;
 	padding: 20px;
 	background-color: #353535;
 	border: 1px solid #787878;
@@ -98,7 +98,7 @@
 
 .ticket-info {
 	background-color: #353535;
-	padding: 14px;
+	padding: 18px;
 	border-bottom: 2px solid #646464;
 	height: 320px;
 	margin-bottom: 20px;
@@ -119,7 +119,7 @@
 	overflow: hidden;
 }
 .ticket-details h2{
-	font-size:30px;
+	font-size:21px;
 	margin-bottom:22px;
 	margin-left : 12px;
 }
