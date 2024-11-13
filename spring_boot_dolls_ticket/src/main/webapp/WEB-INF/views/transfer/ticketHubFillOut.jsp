@@ -40,7 +40,7 @@
 					<th><span class="back">양도인 ID</span></th>
 				</tr>
 				<tr>
-					<td style="border-bottom:1px solid lightgray"><div style="margin-top:-10px;"><span>${sessionScope.sid}</span></div></td>
+					<td style="border-bottom:1px solid lightgray"><div style="margin-top:-10px;margin-left:25px;font-size:19px;"><span>${sessionScope.sid}</span></div></td>
 				</tr>
 				
 				<tr style="height:10px;">
@@ -66,11 +66,10 @@
 								<table style='width:100%;'>
 								<tr>
 									<td><input type="checkbox" style="width:20px;" value="${show.reservationId}" name="reservationId"></td>
-									<td><a href="<c:url value='/performance/detailViewPerformance/${show.performanceId}'/>"><img src="/image/${show.performanceImagePath}" width='150px'></a></td>
+									<td><a href="<c:url value='/performance/detailViewPerformance/${show.performanceId}'/>"><img src="/image/${show.performanceImagePath}" width='130px'></a></td>
 									<td>
-										
 										<div>
-											<span>${show.performanceKindCd}</span>
+											<span>[${show.performanceKindCd == 'M'? '뮤지컬':'콘서트'}]</span>
 										</div>
 										<div>
 											<span>${show.performanceName}</span>

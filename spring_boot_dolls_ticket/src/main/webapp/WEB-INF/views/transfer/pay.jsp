@@ -33,9 +33,11 @@
 	<div class="show-item">
 		<table style='width:1000px;border-top:0px solid lightgray;border-collapse:collapse;'>
 			<tr>
-				<td style='width:150px'><img src="/image/${item.performanceImagePath}" width='120px'></td>
+				<td style='width:150px;'><img src="/image/${item.performanceImagePath}" width='120px' style='margin-left:20px;'></td>
 				<td>
-					
+					<div>
+						<span>[${show.performanceKindCd == 'M'? '뮤지컬':'콘서트'}]</span>
+					</div>
 					<div><span>${item.performanceName}</span></div>
 					<div>
 						<span>일시 : ${item.performanceDate}</span>
@@ -55,7 +57,7 @@
 
  	<div style='width:1000px;margin-top: 20px;'>
  		<div style="font-size:20px;">
-			최종 결제 금액 <span style="font-size:30px;font-weight:bold;">&nbsp;&nbsp;<fmt:formatNumber value="${totalPrice}" pattern="#,###"/></span><span style="font-size:30px;">원</span>
+			최종 결제 금액 <span style="font-size:27px;font-weight:bold;">&nbsp;&nbsp;<fmt:formatNumber value="${totalPrice}" pattern="#,###"/></span><span style="font-size:27px;">원</span>
 		</div>
 	
 	    <div id="payment-method" ></div>

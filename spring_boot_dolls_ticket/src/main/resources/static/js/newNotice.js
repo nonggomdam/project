@@ -5,7 +5,7 @@ $(document).ready(function() {
         // 입력 값 가져오기
         const noticeTitle = $("input[name='noticeTitle']").val().trim();
         const noticeType = $("select[name='noticeType']").val();
-        const noticeContent = $("input[name='noticeContent']").val().trim();
+        const noticeContent = $("textarea[name='noticeContent']").val().trim();
 
         // 유효성 검사
         if (!noticeTitle) {
@@ -30,7 +30,7 @@ $(document).ready(function() {
             data: formData,
             success: function(data) {
                 alert("공지 사항이 성공적으로 등록되었습니다.");
-                window.location.href = "<c:url value='/admin/noticeList'/>"; // 공지 사항 목록 페이지로 이동
+                window.location.href = "/admin/noticeList"; // 공지 사항 목록 페이지로 이동
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);

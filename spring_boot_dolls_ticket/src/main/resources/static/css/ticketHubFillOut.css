@@ -27,15 +27,6 @@ body {
    margin-bottom:200px;
 }
 
-h1 {
-   margin-top:40px;
-   font-size:50px;
-}
-
-h4 {
-   font-size:25px;	
-}
-
 #box {
    margin-top:100px;
    width:100%;
@@ -73,6 +64,7 @@ td {
 	padding:13px;
 	border-radius:10px;
 	color:#5e5e5e;
+	font-weight:bold;
 }
 
 input {
@@ -80,12 +72,12 @@ input {
 	width:90%;
 	border:3px solid #e3e3e3;
 	border-radius:5px;
-	font-size:18px;
+	font-size:17px;
 	box-sizing: border-box;
 }
 
 button {
-	font-size:25px;
+	font-size:23px;
 	font-weight:bold;
 	border:2px solid #20B2AA;
 	border-radius:5px;
@@ -99,10 +91,9 @@ button {
 td div {
 	padding:10px;
 	width:90%;
-	font-size:21px;
+	font-size:18px;
 	box-sizing:border-box;
 	display:inline-block;
-	margin-left:30px;
 }
 
 .show-item {

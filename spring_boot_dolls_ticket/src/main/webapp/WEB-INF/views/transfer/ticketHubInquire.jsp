@@ -31,13 +31,16 @@
 		
 		<div id="status">
 
-			<span>
+			<span class="<c:choose>
+               <c:when test="${nb.assignmentStatus == 'A'}">transfer-progress</c:when>
+               <c:when test="${nb.assignmentStatus == 'B'}">transfer-completed</c:when>
+            </c:choose>">
 				<c:choose>
 			        <c:when test="${nb.assignmentStatus == 'A'}">
 			            진행중
 			        </c:when>
 			        <c:when test="${nb.assignmentStatus == 'B'}">
-			            완료
+			            종료
 			        </c:when>
 	        	</c:choose>
 			</span>
@@ -73,7 +76,12 @@
 										<td style='width:130px;'><a href="<c:url value='/performance/detailViewPerformance/${item.performanceId}'/>"><img src="/image/${item.performanceImagePath}" width='120px'></a></td>
 										<td>
 											
-											<div><span>${item.performanceKindCd}</span><span>${item.performanceName}</span></div>
+											<div>
+												<span>[${show.performanceKindCd == 'M'? '뮤지컬':'콘서트'}]</span>
+											</div>
+											<div>
+												<span>${item.performanceName}</span>
+											</div>
 											<div>
 												<span>일시 : ${item.performanceDate}</span>
 											</div>
@@ -83,7 +91,7 @@
 											<div>
 												<span class="price" data-price=${item.price }>가격 : <fmt:formatNumber value="${item.price}" pattern="#,###"/>원</span>
 												<c:if test="${item.soldYn == 'Y'}">
-													<span style="margin-left:30px;color:red;font-weight:bold;border:3px solid red;border-radius:5px;padding:8px;">판매완료</span> 
+													<span style="margin-left:10px;color:red;border:3px solid red;border-radius:5px;padding:8px;">판매완료</span> 
 												</c:if>											
 											</div>									
 										</td>
@@ -96,7 +104,7 @@
 				</tr>		
 			</table>
 			
-			<c:if test="${nb.custId != sessionScope.sid}">
+			<c:if test="${nb.custId != sessionScope.sid && nb.assignmentStatus != 'B'}">
 			<div id="combine">
 				<div id="price">
 					<span class="total-price">최종 결제예정금액</span>
@@ -143,7 +151,7 @@
 		
 		function showLoginAlert() {
 		    alert('로그인이 필요합니다.');
-		    window.location.href="<c:url value='/member/loginForm'/>"; // 로그인 페이지 URL로 변경하세요
+		    window.location.href="<c:url value='/member/loginForm'/>";
 		}
 	</script>
 	 
