@@ -431,13 +431,13 @@ h3 {
 			<table class="order-table">
 				<thead>
 					<tr>
-						<th>상품명</th>
-						<th>좌석</th>
-						<th>금액</th>
-						<th>예매날짜</th>
-						<th>공연날짜</th>
-						<th>진행상태</th>
-						<th>구매확정 및 리뷰</th>
+						 <th style="width:20%;">상품명</th>
+                  <th style="width:8%;">좌석</th>
+                  <th style="width:15%;">금액</th>
+                  <th style="width:16%;">예매날짜</th>
+                  <th style="width:16%;">공연날짜</th>
+                  <th style="width:10%;">진행상태</th>
+                  <th style="width:15%;">구매확정 및 리뷰</th>
 					</tr>
 				</thead>
 				<tbody>
