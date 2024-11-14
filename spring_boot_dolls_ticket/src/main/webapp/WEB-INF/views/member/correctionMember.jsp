@@ -88,7 +88,7 @@
 						<tr>
 							<th>전화번호</th>
 							<td class="input-group"><input type="text"
-								id="custPhonenumber" name="custPhonenumber"
+								id="custPhoneNumber" name="custPhoneNumber"
 								value="${myInfo.custPhoneNumber}" maxlength="11"
 								placeholder="숫자로만 입력하세요"></td>
 						</tr>
