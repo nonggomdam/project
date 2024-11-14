@@ -369,8 +369,8 @@ public class TransferController {
 			for (int i = 0; i < rslt.size(); i++) {
 
 				String content = String.format(
-						"<tr><td><img width='120px' src='%s'></td><td style='border:1px solid #eeeeee;padding:5px;'><div style='widh:600px;font-weight:bold;'><span style='display: inline-block;width:70px;text-align:right;'>예매번호</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>공연명</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>공연날짜</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>좌석</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>가격</span> %,d원</div></td></tr>",
-						uri+rslt.get(i).getPerformanceImagePath(),
+						"<tr><td style='border:1px solid #eeeeee;padding:5px;'><div style='widh:600px;font-weight:bold;'><span style='display: inline-block;width:70px;text-align:right;'>예매번호</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>공연명</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>공연날짜</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>좌석</span> %s</div><div style='width:600px;'><span style='display: inline-block;width:70px;text-align:right;'>가격</span> %,d원</div></td></tr>",
+						
 						rslt.get(i).getReservationId(), rslt.get(i).getPerformanceName(),
 						rslt.get(i).getPerformanceDate(),
 						rslt.get(i).getReservationSeatKindCd() + rslt.get(i).getReservationSeatNumber(),
